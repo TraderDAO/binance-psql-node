@@ -1,0 +1,22 @@
+{
+  "name": "crypto-database",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "npm": "=6.14.12",
+    "node": "=14.16.1"
+  },
+  "scripts": {
+    "serve": "nodemon index.js ",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "traderPete",
+  "type": "module",
+  "license": "MIT",
+  "dependencies": {
+    "ccxt": "^1.91.15",
+    "dotenv": "^16.0.1",
+    "pg": "^8.7.3"
+  }
+}
