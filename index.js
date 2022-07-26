@@ -4,10 +4,13 @@ import { dbInputs } from './Inputs/config.js';
 import { initDB } from './DBConnection/initPool.js';
 import { loadLastBarClosedPrice } from './DBConnection/loadPrice.js';
 import { isNewBar } from './utilities/isNewBar.js';
+import { loadPastOrders } from './DBConnection/loadInitOrders.js';
 
-const run = () =>{
+const run = async() =>{
     const pool = initDB();
 
+    const pastOrders = await loadPastOrders(pool)
+   
     setInterval(async() => {
         if(await isNewBar(tradingInputs.market, tradingInputs.timeframe)){
             await loadLastBarClosedPrice(pool);
