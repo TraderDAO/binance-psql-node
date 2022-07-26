@@ -1,19 +1,19 @@
 import 'dotenv/config'
-import { tradingInputs } from "./Inputs/config.js";
+import { tradingInputs, symbols } from "./Inputs/config.js";
 import { dbInputs } from './Inputs/config.js';
 import { initDB } from './DBConnection/initPool.js';
-import { loadPrice } from './DBConnection/loadPrice.js';
-
+import { loadLastBarClosedPrice } from './DBConnection/loadPrice.js';
+import { isNewBar } from './utilities/isNewBar.js';
 
 const run = () =>{
     const pool = initDB();
 
     setInterval(async() => {
-        const result = await loadPrice(tradingInputs.market, tradingInputs.exchange, pool);
-       
-        console.log(result);
+        if(await isNewBar(tradingInputs.market, tradingInputs.timeframe)){
+            await loadLastBarClosedPrice(pool);
+        }  
     }, dbInputs.loadInterval);
-    // pool.end();
+    // pool.end(); 
 }
 
 run();

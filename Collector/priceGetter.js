@@ -1,18 +1,16 @@
 import {binanceClient} from "../ExchangeSetting/exchangeConfig.js";
+import { tradingInputs } from "../Inputs/config.js";
 
-const priceGetter = async(market, exchange) => {
-    if(exchange == "binance"){
-        const marketPrice = await binanceClient.fetchTicker(market);
+const priceGetter = async(market) => {
+        const ohlc = await binanceClient.fetchOHLCV(market, tradingInputs.timeframe);
         // console.log(marketPrice); 
-        const price = marketPrice.info.lastPrice;
-        const timestamp = marketPrice.info.closeTime;
-        return {timestamp, price};
-    }else{
-        console.log("exchange not supported")
-    }
+        const price = ohlc[ohlc.length - 2][4]
+    
+        return {price};
+
 }
 
-// console.log(await priceGetter("BTC/BUSD","binance"))
+// console.log(await priceGetter("BTC/BUSD"))
 
 export{
     priceGetter
