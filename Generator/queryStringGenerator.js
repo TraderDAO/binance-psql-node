@@ -11,7 +11,7 @@ const queryStringData = async(market) => {
     let queryString = `INSERT INTO ${dbInputs.tableName}(timestamp, symbol, price
         )VALUES('${timestamp}', '${symbol}', '${price}');`;
     
-     return{queryString};
+     return{queryString, timestamp, symbol, price};
 }
 
 // console.log(await queryStringData("BTC/BUSD"))
