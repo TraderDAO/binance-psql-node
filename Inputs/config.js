@@ -1,17 +1,40 @@
 const dbInputs = {
-    tableName: "btcprice",
+    tableName: "btcprice3",
     loadInterval: 10000,
-    param1: "timestamp",
-    param2: "price"
-
 };
 
 const tradingInputs = {
-    market: "BTCUSDT",
+    market: "BTCBUSD",
+    timeframe: "1m",
     exchange: "binance"
 }
 
+const symbols = [
+    "ETHUSDT",
+    "BTCUSDT",
+    "XRPUSDT",
+    "ADAUSDT",
+    "BATUSDT",
+    "BNBUSDT",
+    "LINKUSDT",
+    "MANAUSDT",
+    "SOLUSDT",
+    "MATICUSDT",
+    "THETAUSDT",
+    "HNTUSDT",
+    "DOTUSDT",
+    "YFIUSDT",
+    "LUNAUSDT",
+    "UNIUSDT",
+    "AVAXUSDT",
+    "AAVEUSDT",
+    "QNTUSDT",
+    "AXSUSDT",
+    "FILUSDT"
+]
+
 export{
     dbInputs,
-    tradingInputs
+    tradingInputs,
+    symbols
 }

@@ -1,18 +1,20 @@
 import { priceGetter } from "../Collector/priceGetter.js";
 import { dbInputs } from "../Inputs/config.js";
+import { getCurrentTime } from "../utilities/getCurrentTime.js";
 
-
-const queryStringData = async(market, exchange) => {
-    const {timestamp, price} = await priceGetter(market, exchange);
-  
-    let queryString = `INSERT INTO ${dbInputs.tableName}(
-        ${dbInputs.param1}, ${dbInputs.param2})VALUES(
-            ${timestamp}, ${price});`;
+const queryStringData = async(market) => {
     
-    return {queryString, timestamp, price};
+    const timestamp = getCurrentTime();
+    const symbol = await market;
+    const {price} = await priceGetter(market);
+
+    let queryString = `INSERT INTO ${dbInputs.tableName}(timestamp, symbol, price
+        )VALUES('${timestamp}', '${symbol}', '${price}');`;
+    
+     return{queryString};
 }
 
-// console.log(await queryStringData("BTC/BUSD", "binance"))
+// console.log(await queryStringData("BTC/BUSD"))
 
 
 export{

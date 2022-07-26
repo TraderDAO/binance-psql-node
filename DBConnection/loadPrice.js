@@ -1,15 +1,24 @@
 import { queryStringData } from "../Generator/queryStringGenerator.js";
+import { symbols } from "../Inputs/config.js";
+// import { initDB } from "./initPool.js";
 
-const loadPrice = async(market, exchange, pool) => {
-    const {queryString, timestamp, price} = await queryStringData(market, exchange);
-    // console.log(queryString);
-    pool.query( queryString,(err, res) => {
-        // console.log(err, res);
-        }
-    );
-    return {timestamp, price};
-}
+const loadLastBarClosedPrice = async(pool) => {
+    for(let i = 0; i < symbols.length; i++){
+        const {queryString} = await queryStringData(symbols[i]);
+        // console.log(queryString);
+        await pool.query( queryString,(res,err) => {
+            if(res){
+                console.log("success")
+            }else{
+                console.log(err);
+            }
+            }
+        );
+    }
+} 
+
+// loadPrice(initDB())
 
 export{
-    loadPrice,
+    loadLastBarClosedPrice,
 }
