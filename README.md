@@ -26,7 +26,7 @@
 
 1. Clone the code
   ```sh
-  git clone https://github.com/traderpete/crypto-trading-db.git
+  git clone https://github.com/TraderDAO/binance-psql-node.git
   ```
 2. NPM install
   ```sh
