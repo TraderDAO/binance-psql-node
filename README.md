@@ -19,7 +19,8 @@
   
 4. Create table you need (for example)
   ```sh
-   CREATE TABLE btcPrice(id SERIAL PRIMARY KEY, timestamp TEXT, price INT);
+   CREATE TABLE cryptoPrice(id SERIAL PRIMARY KEY, timestamp TEXT, price INT);
+   CREATE TABLE orderstable(id SERIAL PRIMARY KEY, time TEXT, orderId BIGINT, symbol TEXT, side TEXT, price FLOAT(8), amount FLOAT(8), cost FLOAT(8), executedQty FLOAT(8), origQty FLOAT(8), remaining FLOAT(8), type TEXT, status TEXT, status2 TEXT, fee TEXT);
   ```
 
 ### 2. Run the Code
