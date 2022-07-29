@@ -5,15 +5,18 @@ let barNow = [0];
 
 const isNewBar = async (market, timeframe) => {
         try{
-            const ohlc = await binanceClient.fetchOHLCV(market, timeframe, undefined, 1);
+            const ohlc = await binanceClient.fetchOHLCV(market, timeframe, undefined, 2);
 
             if(barNow[barNow.length - 1] != ohlc[0][1]){
                 barNow.push(ohlc[0][1]);
                 barNow.shift();
                 console.log("new bar:", barNow);
-                return true;
+                const barInfo = {};
+                barInfo.isNewBar = true;
+                barInfo.timestamp = ohlc[0][0];
+                return barInfo;
             }else{
-                console.log("same bar", barNow);
+                // console.log("same bar", barNow);
                 return false;
             }
         }catch(err){

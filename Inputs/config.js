@@ -1,7 +1,7 @@
 const dbInputs = {
     tableName: "btcprice3",
     orderstable:"orderstable2",
-    loadInterval: 10000, 
+    loadInterval: 1000, 
 };
 
 const tradingInputs = {
