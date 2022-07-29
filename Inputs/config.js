@@ -1,6 +1,6 @@
 const dbInputs = {
     tableName: "btcprice3",
-    orderstable:"orderstable",
+    orderstable:"orderstable2",
     loadInterval: 10000, 
 };
 
@@ -13,7 +13,8 @@ const tradingInputs = {
 const symbols = [
     // "CRV/BUSD",
     // "ADA/BUSD",
-    // "FTM/BUSD"
+    // "FTM/BUSD",
+    // "ETH/BUSD",
     "ETHUSDT",
     "BTCUSDT",
     "XRPUSDT",
