@@ -1,10 +1,10 @@
 import { ordersGetter } from "../Collector/ordersGetter.js";
 import { dbInputs } from "../Inputs/config.js";
 
-const loadPastOrdersbySymbol = async(market, pool) => {
+const loadPastOrdersbySymbol = async(market, pool, since) => {
     try{
         // Get Past Orders' Array
-        const pastOrdersArr = await ordersGetter(market);
+        const pastOrdersArr = await ordersGetter(market, since);
         
         for(let i = 0; i < pastOrdersArr.length; i++){
             let { info, datetime, symbol, side, price, amount, cost, filled, origQty, remaining, status, fee} = pastOrdersArr[i];
@@ -21,6 +21,7 @@ const loadPastOrdersbySymbol = async(market, pool) => {
                 });
         }
         console.log(` ${market} loaded`);
+        console.log("Orders added Amount:", pastOrdersArr.length);
         return true;
     }catch(err){
         return console.log("loadPastOrdersbySymbol err", err);

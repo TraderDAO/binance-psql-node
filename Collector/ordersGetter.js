@@ -1,8 +1,8 @@
 import { binanceClient } from "../ExchangeSetting/exchangeConfig.js";
 
-const ordersGetter = async(market) => {
+const ordersGetter = async(market, since) => {
     try{
-        const pastOrders = await binanceClient.fetchOrders(market);
+        const pastOrders = await binanceClient.fetchOrders(market, since);
         // console.log(pastOrders);
         return pastOrders;
     }catch(err){
