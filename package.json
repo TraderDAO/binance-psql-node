@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "engines": {
-    "npm": "=6.14.12",
-    "node": "=14.16.1"
+    "npm": ">=6.14.12",
+    "node": ">=14.17.0"
   },
   "scripts": {
     "serve": "nodemon index.js ",
@@ -18,5 +18,9 @@
     "ccxt": "^1.91.15",
     "dotenv": "^16.0.1",
     "pg": "^8.7.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.20.0",
+    "eslint-config-google": "^0.14.0"
   }
 }

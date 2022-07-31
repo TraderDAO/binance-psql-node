@@ -1,5 +1,4 @@
 import {binanceClient} from "../ExchangeSetting/exchangeConfig.js";
-import {tradingInputs} from "../Inputs/config.js"
 
 let barNow = [0];
 

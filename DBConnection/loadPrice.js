@@ -1,25 +1,33 @@
-import { queryStringData } from "../Generator/queryStringGenerator.js";
-import { symbols } from "../Inputs/config.js";
-// import { initDB } from "./initPool.js";
+import {symbols} from '../Inputs/config.js';
+import { priceGetter } from "../Collector/priceGetter.js";
+import { dbInput } from "../Inputs/config.js";
 
-const loadLastBarClosedPrice = async(pool) => {
-    try{
-        // Load Last Bar Closed Price by Symbol
-        for(let i = 0; i < symbols.length; i++){
-            const {queryString, time, symbol, price} = await queryStringData(symbols[i]);
-            // console.log(queryString);
-            await pool.query( queryString,(err) => {
-                console.log({time, symbol, price})
-                // console.log("err:", err);
-            });
-        }
-    }catch(err){
-        return console.log("loadLastBarClosedPrice err", err);
+const loadMarkPrice = async (pool) => {
+  try{
+    for(let i = 0; i < symbols.length; i++){
+      await loadMarkPricebySymbol(symbols[i], pool);
     }
+  } catch (err) {
+    return console.log("loadMarkPrice err", err);
+  }
 } 
 
-// loadPrice(initDB())
+const loadMarkPricebySymbol = async (market, pool) => {
+  try{
+    const {price, timestamp: time} = await priceGetter(market);
+    
+    const queryString = `INSERT INTO ${dbInput.markPriceTable}(timestamp, symbol, price
+        )VALUES('${time}', '${market}', '${price}');`;
+    
+    pool.query( queryString, (err) => {
+      console.log("load mark price err:", err);
+    });
+    // console.log(queryString);
+  } catch (err) {
+    return console.log('loadMarkPricebySymbol err', err);
+  }
+}
 
 export{
-    loadLastBarClosedPrice,
+    loadMarkPrice,
 }
