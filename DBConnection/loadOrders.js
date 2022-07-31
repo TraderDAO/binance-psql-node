@@ -16,8 +16,8 @@ const loadOrders = async (pool, since) => {
 const loadOrdersbySymbol = async (market, pool, since) => {
   try {
     const ordersArr = await ordersGetter(market, since);
-
-    await ordersArr.forEach( (orderObj) => {
+    // console.log(ordersArr);
+    ordersArr.forEach( (orderObj) => {
       const {info, datetime, symbol, side, price, amount,
         cost, filled, remaining, openStatus} = orderObj;
 
@@ -38,8 +38,8 @@ const loadOrdersbySymbol = async (market, pool, since) => {
   }
 };
 
-const loadNewOrders = async (pool, since) => {
-  await loadOrders(pool, since);
+const loadNewOrders = (pool, since) => {
+  loadOrders(pool, since);
 };
 
 export {
