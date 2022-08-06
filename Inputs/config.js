@@ -1,6 +1,6 @@
 const dbInput = {
-  markPriceTable: 'markPrice',
-  orderstable: 'orderstable',
+  markPriceTable: 'sbinancedata.markPrice',
+  orderstable: 'sbinancedata.orderstable',
   loadInterval: 10000,
 };
 
