@@ -1,6 +1,0 @@
--- Create Symbol Price Table
-CREATE TABLE markPrice(id SERIAL PRIMARY KEY, timestamp TEXT, symbol TEXT, price FLOAT(8));
-
--- Create Past Orders' Table
-CREATE TABLE orderstable(id SERIAL PRIMARY KEY, time TEXT, orderId BIGINT, symbol TEXT, side TEXT, price FLOAT(8), amount FLOAT(8), cost FLOAT(8), executedQty FLOAT(8), remaining FLOAT(8), type TEXT, openStatus TEXT, unfilledStatus TEXT);
-
