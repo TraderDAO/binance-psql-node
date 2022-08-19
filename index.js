@@ -1,8 +1,7 @@
 import 'dotenv/config';
 import {dbInput} from './Inputs/config.js';
 import {initDB} from './DBConnection/initPool.js';
-import {loadMarkPrice} from './DBConnection/loadPrice.js';
-import {loadOrders} from './DBConnection/loadOrders.js';
+import {loadMarkPrice, loadIncomingPrice} from './DBConnection/loadPrice.js';
 
 const run = async () =>{
   // Init DB Pool
@@ -13,6 +12,7 @@ const run = async () =>{
   setInterval( () => {
     loadMarkPrice(pool);
     loadOrders(pool);
+    loadIncomingPrice(pool);
   }, dbInput.loadInterval);
 };
 

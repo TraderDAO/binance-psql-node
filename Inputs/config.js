@@ -1,7 +1,10 @@
 const dbInput = {
-  markPriceTable: 'sbinancedata.markPrice',
-  orderstable: 'sbinancedata.orderstable',
-  loadInterval: 10000,
+  markPriceTable: 'dbt_traderdao.markPrice',
+  orderstable: 'dbt_traderdao.orderstable',
+  incomingPriceTable: 'dbt_traderdao.incomingprice',
+  markPriceTimeframe: '1m',
+  incomingPriceTimeframe: '1d',
+  loadInterval: 30000,
 };
 
 const tradingInput = {
@@ -11,32 +14,27 @@ const tradingInput = {
 };
 
 const symbols = [
-  'CRV/BUSD',
-  'FTM/BUSD',
-  'SOL/BUSD'
-  // 'ADA/BUSD',
-  // 'ETH/BUSD',
-  // 'ETHUSDT',
-  // 'BTCUSDT',
-  // 'XRPUSDT',
-  // 'ADAUSDT',
-  // 'BATUSDT',
-  // 'BNBUSDT',
-  // 'LINKUSDT',
-  // 'MANAUSDT',
-  // 'SOLUSDT',
-  // 'MATICUSDT',
-  // 'THETAUSDT',
-  // 'HNTUSDT',
-  // 'DOTUSDT',
-  // 'YFIUSDT',
-  // 'LUNAUSDT',
-  // 'UNIUSDT',
-  // 'AVAXUSDT',
-  // 'AAVEUSDT',
-  // 'QNTUSDT',
-  // 'AXSUSDT',
-  // 'FILUSDT'
+  'ETH/USDT',
+  'BNB/USDT',
+  'BTC/USDT',
+  'XRP/USDT',
+  'ADA/USDT',
+  'BAT/USDT',
+  'LINK/USDT',
+  'MANA/USDT',
+  'SOL/USDT',
+  'MATIC/USDT',
+  'THETA/USDT',
+  'HNT/USDT',
+  'DOT/USDT',
+  'YFI/USDT',
+  'LUNA/USDT',
+  'UNI/USDT',
+  'AVAX/USDT',
+  'AAVE/USDT',
+  'QNT/USDT',
+  'AXS/USDT',
+  'FIL/USDT'
 ];
 
 const symbolLastUpdate = {

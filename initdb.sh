@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-PGOPTIONS="--search_path=sbinancedata"
+PGOPTIONS="--search_path=dbt_traderdao"
 export PGOPTIONS
 
-psql -d dbtpractice -c "DROP TABLE IF EXISTS markprice, orderstable;"
-psql -d dbtpractice -c "CREATE SCHEMA IF NOT EXISTS sbinancedata;"
-psql -d dbtpractice -c "CREATE TABLE dbtpractice.sbinancedata.markprice(id SERIAL PRIMARY KEY, timestamp TEXT, symbol TEXT, price FLOAT(8));"
-psql -d dbtpractice -c "CREATE TABLE dbtpractice.sbinancedata.orderstable(id SERIAL PRIMARY KEY, time TEXT, orderId BIGINT, symbol TEXT, side TEXT, price FLOAT(8), amount FLOAT(8), cost FLOAT(8), executedQty FLOAT(8), remaining FLOAT(8), type TEXT, openStatus TEXT, unfilledStatus TEXT);"
+psql -d traderDao -c "DROP TABLE IF EXISTS markprice, orderstable;"
+psql -d traderDao -c "CREATE SCHEMA IF NOT EXISTS dbt_traderdao;"
+psql -d traderDao -c "CREATE TABLE dbt_traderdao.markprice(id SERIAL PRIMARY KEY, timestamp BIGINT, symbol TEXT, price numeric);"
+psql -d traderDao -c "CREATE TABLE dbt_traderdao.orderstable(id SERIAL PRIMARY KEY, time BIGINT, orderId BIGINT, symbol TEXT, side TEXT, price numeric, amount numeric, cost numeric, executedQty numeric, remaining numeric, type TEXT, openStatus TEXT, unfilledStatus TEXT);"
