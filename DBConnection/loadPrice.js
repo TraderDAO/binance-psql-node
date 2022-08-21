@@ -1,61 +1,37 @@
 import {symbols} from '../Inputs/config.js';
-import {priceGetter} from "../Collector/priceGetter.js";
 import {dbInput} from "../Inputs/config.js";
+import {binanceClient} from "../ExchangeSetting/exchangeConfig.js";
 
-const loadMarkPrice = async (pool) => {
+const loadPrice = async (pool, timeframe, tableName) => {
   try{
-    for(let i = 0; i < symbols.length; i++){
-      await loadMarkPricebySymbol(symbols[i], pool);
-    }
-  } catch (err) {
-    return console.log("loadMarkPrice err", err);
-  }
-} 
-
-const loadMarkPricebySymbol = async (market, pool) => {
-  try{
-    const {price, timestamp: time} = await priceGetter(market, dbInput.markPriceTimeframe);
-    
-    const queryString = `INSERT INTO ${dbInput.markPriceTable}(timestamp, symbol, price
+    let arrOfSymbolPromise = symbols.map(symbol=>{
+      return binanceClient.fetchOHLCV(symbol, timeframe);
+    })
+    const results = await Promise.all(arrOfSymbolPromise);
+    results.forEach((ohlc, index)=>{
+      const price = ohlc[ohlc.length - 2][4];
+      const time = ohlc[ohlc.length - 2][0];
+      const market = symbols[index];
+      const queryString = `INSERT INTO ${tableName}(timestamp, symbol, price
         )VALUES('${time}', '${market}', '${price}');`;
-    
     pool.query( queryString, (err) => {
-      console.log("load mark price err:", err);
+      console.log("loadPrice err:", err);
     });
-    // console.log(queryString);
+    })
   } catch (err) {
-    return console.log('loadMarkPricebySymbol err', err);
+    return console.log("loadIncomingPrice err", err);
   }
 }
 
 const loadIncomingPrice = async (pool) => {
-  try{
-    for(let i = 0; i < symbols.length; i++){
-      await loadIncomingkPricebySymbol(symbols[i], pool);
-    }
-  } catch (err) {
-    return console.log("loadIncomingPrice err", err);
-  }
+  loadPrice(pool, dbInput.incomingPriceTimeframe, dbInput.incomingPriceTable)
 } 
 
-const loadIncomingkPricebySymbol = async (market, pool) => {
-  try{
-    const {price, timestamp: time} = await priceGetter(market, dbInput.incomingPriceTimeframe);
-    
-    const queryString = `INSERT INTO ${dbInput.incomingPriceTable}(timestamp, symbol, price
-        )VALUES('${time}', '${market}', '${price}');`;
-    
-    pool.query( queryString, (err) => {
-      console.log("load loadIncomingkPricebySymbol err:", err);
-    });
-    // console.log(queryString);
-  } catch (err) {
-    return console.log('loadIncomingkPricebySymbol err', err);
-  }
-}
-
+const loadMarkPrice = async (pool) => {
+  loadPrice(pool, dbInput.markPriceTimeframe, dbInput.markPriceTable)
+} 
 
 export{
-    loadMarkPrice,
-    loadIncomingPrice
+  loadMarkPrice,
+  loadIncomingPrice
 }
