@@ -15,8 +15,8 @@ const loadPrice = async (pool, timeframe, tableName) => {
     let arrOfSymbolPromise = symbols.map(symbol=>{
       return binanceClient.fetchOHLCV(symbol, timeframe);
     })
-    const results = await Promise.all(arrOfSymbolPromise);
-    results.forEach((ohlc, index)=>{
+    const priceResults = await Promise.all(arrOfSymbolPromise);
+    priceResults.forEach((ohlc, index)=>{
       const price = ohlc[ohlc.length - 2][4];
       const time = ohlc[ohlc.length - 2][0];
       const market = symbols[index];
