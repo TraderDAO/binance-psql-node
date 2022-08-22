@@ -29,9 +29,9 @@ const loadOrdersbySymbol = async (market, pool, since) => {
       const {orderId, status: unfilledStatus, type} = info;
 
       const queryString = `INSERT INTO ${dbInput.orderstable}(
-        time, orderId, symbol, side, price, amount, cost, executedQty, remaining, type, openStatus, unfilledStatus
+        time, orderId, symbol, base, side, price, amount, cost, executedQty, remaining, type, openStatus, unfilledStatus
         )VALUES(
-        '${timestamp}','${orderId}', '${symbol}', '${side}', '${price}', '${amount}', '${cost}', '${filled}', '${remaining}', '${type}', '${openStatus}', '${unfilledStatus}');`;
+        '${timestamp}','${orderId}', '${symbol.split('/')[0]}', '${symbol.split('/')[1]}', '${side}', '${price}', '${amount}', '${cost}', '${filled}', '${remaining}', '${type}', '${openStatus}', '${unfilledStatus}');`;
 
       pool.query( queryString, (err) => {
         console.log('load orders err:', err);
