@@ -10,8 +10,8 @@ const run = async () =>{
 
   setInterval( () => {
     loadMarkPrice(pool);
-    loadOrders(pool);
     loadIncomingPrice(pool);
+    loadOrders(pool);
   }, dbInput.loadInterval);
 };
 

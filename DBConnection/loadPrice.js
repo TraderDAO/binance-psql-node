@@ -2,6 +2,14 @@ import {symbols} from '../Inputs/config.js';
 import {dbInput} from "../Inputs/config.js";
 import {binanceClient} from "../ExchangeSetting/exchangeConfig.js";
 
+const loadIncomingPrice = async (pool) => {
+  loadPrice(pool, dbInput.incomingPriceTimeframe, dbInput.incomingPriceTable)
+} 
+
+const loadMarkPrice = async (pool) => {
+  loadPrice(pool, dbInput.markPriceTimeframe, dbInput.markPriceTable)
+}
+
 const loadPrice = async (pool, timeframe, tableName) => {
   try{
     let arrOfSymbolPromise = symbols.map(symbol=>{
@@ -22,14 +30,6 @@ const loadPrice = async (pool, timeframe, tableName) => {
     return console.log("loadIncomingPrice err", err);
   }
 }
-
-const loadIncomingPrice = async (pool) => {
-  loadPrice(pool, dbInput.incomingPriceTimeframe, dbInput.incomingPriceTable)
-} 
-
-const loadMarkPrice = async (pool) => {
-  loadPrice(pool, dbInput.markPriceTimeframe, dbInput.markPriceTable)
-} 
 
 export{
   loadMarkPrice,
