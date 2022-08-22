@@ -1,7 +1,10 @@
 const dbInput = {
-  markPriceTable: 'dbt_traderdao.markPrice',
-  orderstable: 'dbt_traderdao.orderstable',
-  incomingPriceTable: 'dbt_traderdao.incomingprice',
+  markPriceTable: 'public.markPrice',
+  // markPriceTable: 'dbt_traderdao.markPrice',
+  orderstable: 'public.orderstable',
+  // orderstable: 'dbt_traderdao.orderstable',
+  incomingPriceTable: 'public.incomingprice',
+  // incomingPriceTable: 'dbt_traderdao.incomingprice',
   markPriceTimeframe: '1m',
   incomingPriceTimeframe: '1d',
   loadInterval: 30000,
@@ -40,5 +43,9 @@ const symbols = [
 const symbolLastUpdate = {
 };
 
-
 export {dbInput, tradingInput, symbols, symbolLastUpdate};
+
+
+// dbt_orangesky
+// dbt_orangesky
+// dbt_orangesky
