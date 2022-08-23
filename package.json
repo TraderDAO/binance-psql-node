@@ -16,6 +16,7 @@
   "license": "MIT",
   "dependencies": {
     "ccxt": "^1.91.15",
+    "date-and-time": "^2.4.1",
     "dotenv": "^16.0.1",
     "pg": "^8.7.3"
   },
