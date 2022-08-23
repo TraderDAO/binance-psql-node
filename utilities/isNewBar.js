@@ -2,16 +2,21 @@ import {binanceClient} from '../ExchangeSetting/exchangeConfig.js';
 
 const barNow = [0];
 
+const barInit = async(market, timeframe) => {
+  const ohlc = await binanceClient.fetchOHLCV(market, timeframe, undefined, 3);
+  barNow.push(ohlc[ohlc.length - 3][4]);
+  barNow.shift();
+  console.log('barInit:', barNow);
+}
+
 const isNewBar = async (market, timeframe) => {
   try {
-    const ohlc = await binanceClient.fetchOHLCV(
-        market, timeframe, undefined, 2);
-    if (barNow[barNow.length - 1] != ohlc[0][1]) {
-      barNow.push(ohlc[0][1]);
+    const ohlc = await binanceClient.fetchOHLCV(market, timeframe, undefined, 2);
+    if (barNow[barNow.length - 1] != ohlc[ohlc.length - 2][4]) {
+      barNow.push(ohlc[ohlc.length - 2][4]);
       barNow.shift();
-      console.log('new bar:', barNow);
-      const barInfo = {isNewBar: true, timestamp: ohlc[0][0]};
-      return barInfo;
+      // console.log('new bar:', barNow);
+      return true;
     }
     // console.log("same bar", barNow);
     return false;
@@ -21,10 +26,11 @@ const isNewBar = async (market, timeframe) => {
 };
 
 // setInterval(() => {
-//     isNewBar("BTC/BUSD", "1m")
+//     isNewBar("BTC/BUSD", "1d")
 // }, 6000);
 
 export {
   isNewBar,
+  barInit
 };
 
