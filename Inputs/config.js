@@ -1,6 +1,6 @@
 const dbInput = {
   // markPriceTable: 'public.markPrice',
-  markPriceTable: 'dbt_traderdao.markPrice',
+  markPriceTable: 'dbt_traderdao.markPrice2',
   // orderstable: 'public.orderstable',
   orderstable: 'dbt_traderdao.orderstable2',
   // incomingPriceTable: 'public.incomingprice',
@@ -45,26 +45,37 @@ const symbols = [
   'ADA/USDC',
   'BAT/USDC',
   'LINK/USDC',
-  'MANA/USDC',
-  'SOL/USDC',
-  'MATIC/USDC',
-  'THETA/USDC',
-  'HNT/USDC',
-  'DOT/USDC',
-  'YFI/USDC',
-  'LUNA/USDC',
-  'UNI/USDC',
-  'AVAX/USDC',
-  'AAVE/USDC',
-  'QNT/USDC',
-  'AXS/USDC',
-  'FIL/USDC'
+  'SOL/USDC'
+];
+
+const symbolsForMarkPrice = [
+  'ETH/USDT',
+  'BNB/USDT',
+  'BTC/USDT',
+  'XRP/USDT',
+  'ADA/USDT',
+  'BAT/USDT',
+  'LINK/USDT',
+  'MANA/USDT',
+  'SOL/USDT',
+  'MATIC/USDT',
+  'THETA/USDT',
+  'HNT/USDT',
+  'DOT/USDT',
+  'YFI/USDT',
+  'LUNA/USDT',
+  'UNI/USDT',
+  'AVAX/USDT',
+  'AAVE/USDT',
+  'QNT/USDT',
+  'AXS/USDT',
+  'FIL/USDT'
 ];
 
 const symbolLastUpdate = {
 };
 
-export {dbInput, tradingInput, symbols, symbolLastUpdate};
+export {dbInput, tradingInput, symbols, symbolLastUpdate, symbolsForMarkPrice};
 
 
 // dbt_orangesky

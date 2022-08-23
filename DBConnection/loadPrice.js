@@ -1,13 +1,32 @@
-import {symbols} from '../Inputs/config.js';
+import {symbols, symbolsForMarkPrice} from '../Inputs/config.js';
 import {dbInput} from "../Inputs/config.js";
 import {binanceClient} from "../ExchangeSetting/exchangeConfig.js";
+import date from 'date-and-time';
 
-const loadIncomingPrice = async (pool) => {
+const loadIncomingPrice = (pool) => {
   loadPrice(pool, dbInput.incomingPriceTimeframe, dbInput.incomingPriceTable)
-} 
+}
 
-const loadMarkPrice = async (pool) => {
-  loadPrice(pool, dbInput.markPriceTimeframe, dbInput.markPriceTable)
+const loadMarkPrice = (pool) => {
+  loadTrade(pool, dbInput.markPriceTable)
+}
+ 
+const loadTrade = async (pool, tableName) => {
+  let arrOfSymbolPromise = symbolsForMarkPrice.map(symbol=>{
+    return binanceClient.fetchTrades(symbol);
+  })
+  const priceResults = await Promise.all(arrOfSymbolPromise);
+  priceResults.forEach((lastTrade)=>{
+    const {price, timestamp, datetime ,symbol} = lastTrade[lastTrade.length - 1];
+    const now = new Date();
+    const receiveTimestamp = now.getTime();
+    const receiveTime = date.format(now, 'YYYY/MM/DD HH:mm:SSS', true);
+    const queryString = `INSERT INTO ${tableName}(symbol, price, datetime, timestamp, receivetime, receiveTimestamp
+      )VALUES('${symbol}', '${price}', '${datetime}', '${timestamp}', '${receiveTime}', '${receiveTimestamp}');`;
+  pool.query( queryString, (err) => { 
+    console.log("loadPrice err:", err);
+  });
+  })
 }
 
 const loadPrice = async (pool, timeframe, tableName) => {
@@ -15,6 +34,7 @@ const loadPrice = async (pool, timeframe, tableName) => {
     let arrOfSymbolPromise = symbols.map(symbol=>{
       return binanceClient.fetchOHLCV(symbol, timeframe);
     })
+    console.log(arrOfSymbolPromise)
     const priceResults = await Promise.all(arrOfSymbolPromise);
     priceResults.forEach((ohlc, index)=>{
       const price = ohlc[ohlc.length - 2][4];
