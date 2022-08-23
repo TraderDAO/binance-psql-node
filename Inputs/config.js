@@ -4,15 +4,15 @@ const dbInput = {
   // orderstable: 'public.orderstable',
   orderstable: 'dbt_traderdao.orderstable2',
   // incomingPriceTable: 'public.incomingprice',
-  incomingPriceTable: 'dbt_traderdao.incomingprice',
+  settlementPriceTable: 'dbt_traderdao.settlementprice',
   markPriceTimeframe: '1m',
-  incomingPriceTimeframe: '1d',
-  loadInterval: 30000,
+  settlementPriceTimeframe: '1d',
+  loadInterval: 10000,
 };
 
-const tradingInput = {
+const newBarInput = {
   market: 'BTCBUSD',
-  timeframe: '1m',
+  timeframe: '1d',
   exchange: 'binance',
 };
 
@@ -72,10 +72,34 @@ const symbolsForMarkPrice = [
   'FIL/USDT'
 ];
 
+const symbolsForSettlementPrice = [
+  'ETH/USDT',
+  'BNB/USDT',
+  'BTC/USDT',
+  'XRP/USDT',
+  'ADA/USDT',
+  'BAT/USDT',
+  'LINK/USDT',
+  'MANA/USDT',
+  'SOL/USDT',
+  'MATIC/USDT',
+  'THETA/USDT',
+  'HNT/USDT',
+  'DOT/USDT',
+  'YFI/USDT',
+  'LUNA/USDT',
+  'UNI/USDT',
+  'AVAX/USDT',
+  'AAVE/USDT',
+  'QNT/USDT',
+  'AXS/USDT',
+  'FIL/USDT'
+];
+
 const symbolLastUpdate = {
 };
 
-export {dbInput, tradingInput, symbols, symbolLastUpdate, symbolsForMarkPrice};
+export {dbInput, newBarInput, symbols, symbolLastUpdate, symbolsForMarkPrice, symbolsForSettlementPrice};
 
 
 // dbt_orangesky
