@@ -37,7 +37,28 @@ const symbols = [
   'AAVE/USDT',
   'QNT/USDT',
   'AXS/USDT',
-  'FIL/USDT'
+  'FIL/USDT',
+  'ETH/USDC',
+  'BNB/USDC',
+  'BTC/USDC',
+  'XRP/USDC',
+  'ADA/USDC',
+  'BAT/USDC',
+  'LINK/USDC',
+  'MANA/USDC',
+  'SOL/USDC',
+  'MATIC/USDC',
+  'THETA/USDC',
+  'HNT/USDC',
+  'DOT/USDC',
+  'YFI/USDC',
+  'LUNA/USDC',
+  'UNI/USDC',
+  'AVAX/USDC',
+  'AAVE/USDC',
+  'QNT/USDC',
+  'AXS/USDC',
+  'FIL/USDC'
 ];
 
 const symbolLastUpdate = {
