@@ -5,8 +5,11 @@ import {dbInput, symbolLastUpdate, accountSetting} from '../Inputs/config.js';
 const loadOrders = async (pool) => {
   try {
     for (let i = 0; i < symbols.length; i++) {
+      // console.log(symbolLastUpdate)
+      // console.log(symbolLastUpdate[`${symbols[i]}`])
       const symbolLastUpdateTime = await loadOrdersbySymbol(symbols[i], pool, symbolLastUpdate[`${symbols[i]}`]);
       symbolLastUpdate[`${symbols[i]}`] = symbolLastUpdateTime;
+      // console.log(symbolLastUpdate)
     }
   } catch (err) {
     return console.log('loadOrders err', err);
@@ -16,9 +19,8 @@ const loadOrders = async (pool) => {
 const loadOrdersbySymbol = async (market, pool, since) => {
   try {
     const ordersArr = await ordersGetter(market, since);
-    if (since === ordersArr[ordersArr.length - 1].timestamp) {
-      return since;
-    }
+    if (ordersArr.length === 0){ return since;}
+    if (since === ordersArr[ordersArr.length - 1].timestamp) { return since;}
     const newOrdersArr = ordersArr.filter(o => o.timestamp != since);  //In order to remove order which is created at the timestamp of since which had been written to DB
     newOrdersArr.forEach( (orderObj) => {
       const {info, timestamp, symbol, side, price, amount, cost, filled, remaining, status: openStatus} = orderObj;
