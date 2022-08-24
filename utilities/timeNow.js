@@ -11,7 +11,7 @@ const timestampToDate = (timestampForTx) => {
   return (
     time.getUTCFullYear() +
     "/" +
-    time.getUTCMonth() +
+    (time.getUTCMonth() + 1) +
     "/" +
     time.getUTCDate() +
     " " +
