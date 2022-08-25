@@ -1,6 +1,7 @@
 import {symbols} from '../Inputs/config.js';
 import {ordersGetter} from '../Collector/ordersGetter.js';
 import {dbInput, symbolLastUpdate, accountSetting} from '../Inputs/config.js';
+import logger from '../logger.js';
 
 const loadOrders = async (pool) => {
   try {
@@ -12,6 +13,7 @@ const loadOrders = async (pool) => {
       // console.log(symbolLastUpdate)
     }
   } catch (err) {
+    logger.error(`[loadOrders] ${err}`);
     return console.log('loadOrders err', err);
   }
 };
@@ -30,12 +32,13 @@ const loadOrdersbySymbol = async (market, pool, since) => {
         )VALUES(
         '${timestamp}','${orderId}', '${symbol.split('/')[0]}', '${symbol.split('/')[1]}', '${side}', '${price}', '${amount}', '${cost}', '${filled}', '${remaining}', '${type}', '${openStatus}', '${unfilledStatus}', '${accountSetting.portfolioId}', '${accountSetting.accountId}', '${accountSetting.exchangeId}');`;
       pool.query( queryString, (err) => {
-        console.log('load orders err:', err);
+        if(err !== undefined) logger.error(`[loadorders] ${err}`);
       });
     });
     return ordersArr[ordersArr.length - 1].timestamp;
   } catch (err) {
-    return console.log('loadOrdersbySymbol err', err);
+    logger.error(`[loadOrdersbySymbol] ${err}`);
+    return 'loadOrdersbySymbol err' + err;
   }
 };
 

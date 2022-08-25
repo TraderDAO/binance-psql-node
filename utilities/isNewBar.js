@@ -1,4 +1,5 @@
 import {binanceClient} from '../ExchangeSetting/exchangeConfig.js';
+import logger from '../logger.js';
 
 const barNow = [0];
 
@@ -6,7 +7,7 @@ const barInit = async(market, timeframe) => {
   const ohlc = await binanceClient.fetchOHLCV(market, timeframe, undefined, 3);
   barNow.push(ohlc[ohlc.length - 3][4]);
   barNow.shift();
-  console.log('barInit:', barNow);
+  logger.info(`barInit: ${barNow}`);
 }
 
 const isNewBar = async (market, timeframe) => {
@@ -21,6 +22,7 @@ const isNewBar = async (market, timeframe) => {
     // console.log("same bar", barNow);
     return false;
   } catch (err) {
+    logger.error(`isNewBar: ${err}`);
     return console.log('isNewBar err', err);
   }
 };
