@@ -2,7 +2,7 @@ const dbInput = {
   markPriceTable: "public.markPrice",
   orderstable: "public.orderstable",
   settlementPriceTable: "public.settlementprice",
-  markPriceTimeframe: "1m",
+  markPriceTimeframe: "2m",
   settlementPriceTimeframe: "1d",
   loadInterval: 10000
 }
