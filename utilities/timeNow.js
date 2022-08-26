@@ -19,11 +19,11 @@ const timestampToDate = (timestampForTx) => {
     "/" +
     time.getUTCDate() +
     " " +
-    time.getUTCHours() +
+    time.getUTCHours().toString().padStart(2, '0') +
     ":" +
-    time.getUTCMinutes() +
+    time.getUTCMinutes().toString().padStart(2, '0') +
     ":" +
-    time.getUTCSeconds()
+    time.getUTCSeconds().toString().padStart(2, '0')
   )
 }
 
