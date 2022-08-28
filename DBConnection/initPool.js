@@ -1,5 +1,7 @@
 import 'dotenv/config'
 import pkg from 'pg';
+import logger from '../logger.js';
+
 const { Pool } = pkg;
 
 
@@ -14,6 +16,7 @@ const initDB = () =>{
         });
         return pool;
     }catch(err){
+        logger.error(`[initDB] ${err}`);
         return console.log("initDB err", err)
     }
 }

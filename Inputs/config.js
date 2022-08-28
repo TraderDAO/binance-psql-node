@@ -1,58 +1,55 @@
 const dbInput = {
-  // markPriceTable: 'public.markPrice',
-  markPriceTable: "dbt_traderdao.markPrice2",
-  // orderstable: 'public.orderstable',
-  orderstable: "dbt_traderdao.orderstable3",
-  // incomingPriceTable: 'public.incomingprice',
-  settlementPriceTable: "dbt_traderdao.settlementprice",
+  markPriceTable: "public.markPrice",
+  orderstable: "public.orderstable",
+  settlementPriceTable: "public.settlementprice",
   markPriceTimeframe: "1m",
   settlementPriceTimeframe: "1d",
-  loadInterval: 10000,
-};
+  loadInterval: 60000
+}
 
 const newBarInput = {
   market: "BTCBUSD",
   timeframe: "1d",
-  exchange: "binance",
-};
+  exchange: "binance"
+}
 
 const accountSetting = {
   exchangeId: 0,
   accountId: 0,
-  portfolioId: 0,
-};
+  portfolioId: 0
+}
 
 const symbols = [
-  'ETH/USDT',
-  'BNB/USDT',
-  'BTC/USDT',
-  'XRP/USDT',
-  'ADA/USDT',
-  'BAT/USDT',
-  'LINK/USDT',
-  'MANA/USDT',
-  'SOL/USDT',
-  'MATIC/USDT',
-  'THETA/USDT',
-  'HNT/USDT',
-  'DOT/USDT',
-  'YFI/USDT',
-  'LUNA/USDT',
-  'UNI/USDT',
-  'AVAX/USDT',
-  'AAVE/USDT',
-  'QNT/USDT',
-  'AXS/USDT',
-  'FIL/USDT',
-  'ETH/USDC',
-  'BNB/USDC',
-  'BTC/USDC',
-  'XRP/USDC',
-  'ADA/USDC',
-  'BAT/USDC',
-  'LINK/USDC',
-  'SOL/USDC'
-];
+  "ETH/USDT",
+  "BNB/USDT",
+  "BTC/USDT",
+  "XRP/USDT",
+  "ADA/USDT",
+  "BAT/USDT",
+  "LINK/USDT",
+  "MANA/USDT",
+  "SOL/USDT",
+  "MATIC/USDT",
+  "THETA/USDT",
+  "HNT/USDT",
+  "DOT/USDT",
+  "YFI/USDT",
+  "LUNA/USDT",
+  "UNI/USDT",
+  "AVAX/USDT",
+  "AAVE/USDT",
+  "QNT/USDT",
+  "AXS/USDT",
+  "FIL/USDT",
+  "ETH/USDC",
+  "BNB/USDC",
+  "BTC/USDC",
+  "XRP/USDC",
+  "ADA/USDC",
+  "BAT/USDC",
+  "LINK/USDC",
+  "SOL/USDC"
+]
 
 const symbolsForMarkPrice = [
   "ETH/USDT",
@@ -75,8 +72,8 @@ const symbolsForMarkPrice = [
   "AAVE/USDT",
   "QNT/USDT",
   "AXS/USDT",
-  "FIL/USDT",
-];
+  "FIL/USDT"
+]
 
 const symbolsForSettlementPrice = [
   "ETH/USDT",
@@ -99,10 +96,10 @@ const symbolsForSettlementPrice = [
   "AAVE/USDT",
   "QNT/USDT",
   "AXS/USDT",
-  "FIL/USDT",
-];
+  "FIL/USDT"
+]
 
-const symbolLastUpdate = {};
+const symbolLastUpdate = {}
 
 export {
   dbInput,
@@ -111,5 +108,5 @@ export {
   symbolLastUpdate,
   symbolsForMarkPrice,
   symbolsForSettlementPrice,
-  accountSetting,
-};
+  accountSetting
+}

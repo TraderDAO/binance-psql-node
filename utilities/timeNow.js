@@ -1,12 +1,16 @@
-import date from "date-and-time";
+import date from "date-and-time"
 
-const now = new Date();
-const receiveTimestamp = now.getTime();
-const receiveTime = date.format(now, "YYYY/MM/DD HH:mm:SSS", true);
+const receiveTime = () => {
+  return date.format(new Date(), "YYYY/MM/DD HH:mm:SSS", true)
+}
+
+const receiveTimestamp = () => {
+  return new Date().getTime()
+}
 
 const timestampToDate = (timestampForTx) => {
-  const timestamp = timestampForTx;
-  const time = new Date(timestamp);
+  const timestamp = timestampForTx
+  const time = new Date(timestamp)
   // const timeForDate = ;
   return (
     time.getUTCFullYear() +
@@ -20,7 +24,7 @@ const timestampToDate = (timestampForTx) => {
     time.getUTCMinutes() +
     ":" +
     time.getUTCSeconds()
-  );
-};
+  )
+}
 
-export { receiveTimestamp, receiveTime, timestampToDate };
+export { receiveTimestamp, receiveTime, timestampToDate }

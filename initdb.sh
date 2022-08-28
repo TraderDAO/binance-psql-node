@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-PGOPTIONS="--search_path=dbt_traderdao"
+PGOPTIONS="--search_path=public"
 export PGOPTIONS
 
-psql -d traderDao -c "DROP TABLE IF EXISTS markprice, orderstable;"
-psql -d traderDao -c "CREATE SCHEMA IF NOT EXISTS dbt_traderdao;"
-psql -d traderDao -c "CREATE TABLE dbt_traderdao.markprice2(id SERIAL PRIMARY KEY, symbol TEXT, price numeric, timestamp BIGINT, datetime TEXT, receivetime TEXT, receiveTimestamp TEXT);"
-psql -d traderDao -c "CREATE TABLE dbt_traderdao.settlementprice(id SERIAL PRIMARY KEY, symbol TEXT, price numeric, timestamp BIGINT, datetime TEXT, receivetime TEXT, receiveTimestamp TEXT);"
-psql -d traderDao -c "CREATE TABLE dbt_traderdao.orderstable3(id SERIAL PRIMARY KEY, time BIGINT, orderId BIGINT, symbol TEXT, base TEXT, side TEXT, price numeric, amount numeric, cost numeric, executedQty numeric, remaining numeric, type TEXT, openStatus TEXT, unfilledStatus TEXT, portfolio_id numeric, account_id numeric, exchange_id numeric);"
+ -w -c "DROP TABLE IF EXISTS markprice, settlementprice, orderstable;"
+ -w -c "CREATE SCHEMA IF NOT EXISTS public;"
+ -w -c "CREATE TABLE public.markprice(id SERIAL PRIMARY KEY, symbol TEXT, price numeric, timestamp BIGINT, datetime TEXT, receivetime TEXT, receiveTimestamp TEXT);"
+ -w -c "CREATE TABLE public.settlementprice(id SERIAL PRIMARY KEY, symbol TEXT, price numeric, timestamp BIGINT, datetime TEXT, receivetime TEXT, receiveTimestamp TEXT);"
+ -w -c "CREATE TABLE public.orderstable(id SERIAL PRIMARY KEY, time BIGINT, orderId TEXT UNIQUE, symbol TEXT, base TEXT, side TEXT, price numeric, amount numeric, cost numeric, executedQty numeric, remaining numeric, type TEXT, openStatus TEXT, unfilledStatus TEXT, portfolio_id numeric, account_id numeric, exchange_id numeric);"
