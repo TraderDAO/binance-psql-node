@@ -1,4 +1,5 @@
 import { binanceClient } from "../ExchangeSetting/exchangeConfig.js"
+import { dbInput } from "../Inputs/config.js"
   import {
     receiveTimestamp,
   } from "../utilities/timeNow.js"
@@ -6,7 +7,7 @@ import logger from "../logger.js"
 
 const loadPositions = async (pool) => {
   try {
-    const tableName = "stablecoinpnl"
+    const tableName = dbInput.stableCoinTable
     const balances = await binanceClient.fetchBalance()
     const infos = Object.keys(balances)
     const positions = infos.slice(1, infos.length - 5)
