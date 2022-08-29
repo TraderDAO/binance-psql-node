@@ -25,6 +25,7 @@ const symbols = [
   "BTC/USDT",
   "XRP/USDT",
   "ADA/USDT",
+  "TRX/USDT",
   "BAT/USDT",
   "LINK/USDT",
   "MANA/USDT",
@@ -48,7 +49,8 @@ const symbols = [
   "ADA/USDC",
   "BAT/USDC",
   "LINK/USDC",
-  "SOL/USDC"
+  "SOL/USDC",
+  "TRX/USDC"
 ]
 
 const symbolsForMarkPrice = [
@@ -57,6 +59,7 @@ const symbolsForMarkPrice = [
   "BTC/USDT",
   "XRP/USDT",
   "ADA/USDT",
+  "TRX/USDT",
   "BAT/USDT",
   "LINK/USDT",
   "MANA/USDT",
@@ -72,7 +75,16 @@ const symbolsForMarkPrice = [
   "AAVE/USDT",
   "QNT/USDT",
   "AXS/USDT",
-  "FIL/USDT"
+  "FIL/USDT",
+  "ETH/USDC",
+  "BNB/USDC",
+  "BTC/USDC",
+  "XRP/USDC",
+  "ADA/USDC",
+  "BAT/USDC",
+  "LINK/USDC",
+  "SOL/USDC",
+  "TRX/USDC"
 ]
 
 const symbolsForSettlementPrice = [
@@ -81,6 +93,7 @@ const symbolsForSettlementPrice = [
   "BTC/USDT",
   "XRP/USDT",
   "ADA/USDT",
+  "TRX/USDT",
   "BAT/USDT",
   "LINK/USDT",
   "MANA/USDT",
