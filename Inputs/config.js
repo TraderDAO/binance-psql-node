@@ -76,16 +76,7 @@ const symbolsForMarkPrice = [
   "AAVE/USDT",
   "QNT/USDT",
   "AXS/USDT",
-  "FIL/USDT",
-  "ETH/USDC",
-  "BNB/USDC",
-  "BTC/USDC",
-  "XRP/USDC",
-  "ADA/USDC",
-  "BAT/USDC",
-  "LINK/USDC",
-  "SOL/USDC",
-  "TRX/USDC"
+  "FIL/USDT"
 ]
 
 const symbolsForSettlementPrice = [

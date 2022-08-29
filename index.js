@@ -15,16 +15,11 @@ const run = async () => {
   await barInit(newBarInput.market, newBarInput.timeframe)
 
   logger.info("Start ...")
-  await loadPositions(pool)
-  await loadOrders(pool)
-  loadMarkPrice(pool)
-  loadSettlementPrice(pool)
-  logger.info("-".repeat(30))
   setInterval(async () => {
-    await loadPositions(pool)
-    await loadOrders(pool)
     loadMarkPrice(pool)
     loadSettlementPrice(pool)
+    await loadPositions(pool)
+    await loadOrders(pool)
     logger.info("-".repeat(30))
   }, dbInput.loadInterval)
 }
