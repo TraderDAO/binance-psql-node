@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import {dbInput, newBarInput} from './Inputs/config.js';
+import { loadPositions } from "./DBConnection/loadPositions.js"
 import {initDB, initClient} from './DBConnection/initPool.js';
 import {loadSettlementPrice, loadMarkPrice} from './DBConnection/loadPrice.js';
 import { loadOrders } from './DBConnection/loadOrders.js';
@@ -16,11 +17,12 @@ const run = async () => {
   await barInit(newBarInput.market, newBarInput.timeframe);
 
   logger.info('Start ...')
-  setInterval( () => {
+  setInterval( async() => {
     loadMarkPrice(pool);
     loadSettlementPrice(pool);
-    loadOrders(pool);
-    checkOpenOrder(client, pool);
+    await loadPositions(pool);
+    await loadOrders(pool);
+    await checkOpenOrder(client, pool);
     logger.info('-'.repeat(30))
   }, dbInput.loadInterval);
 }; 
