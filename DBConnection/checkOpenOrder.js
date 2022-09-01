@@ -1,11 +1,13 @@
 import { binanceClient } from "../ExchangeSetting/exchangeConfig.js";
+import { dbInput } from "../Inputs/config.js";
 
 const checkOpenOrder = async (client, pool) => {
-  const query = `select * from dbt_traderdao.orderstable where unfilledstatus = 'NEW'`
+  const query = `select * from ${dbInput.orderstable} where unfilledstatus = 'NEW'`
   
   const res = await client.query(query)
   const openOrders = res.rows
-  await client.end()
+  // await client.end()
+  // console.log('openOrders', openOrders)
 
   const arrOfOrders = openOrders.map((order) => {
     let id = order.orderid;
@@ -17,16 +19,19 @@ const checkOpenOrder = async (client, pool) => {
 
   const orderRes = await Promise.all(arrOfOrders);
 
+  // console.log('orderRes', orderRes)
+
   orderRes.forEach((order) =>{
     const { info, remaining, cost } = order;
     const { executedQty, status: unfilledStatus, orderId } = info;
     const queryString = `
-    UPDATE dbt_traderdao.orderstable
+    UPDATE ${dbInput.orderstable}
     SET cost = '${cost}', executedqty = '${executedQty}', remaining = '${remaining}', unfilledstatus = '${unfilledStatus}'
     WHERE orderid = '${orderId}'
     `
+    // console.log('queryString', queryString);
     pool.query(queryString, (err) => {
-      console.log(err)
+      if(err !== undefined) logger.error(`[loadorders] ${err}`);
     })
   })
 }
