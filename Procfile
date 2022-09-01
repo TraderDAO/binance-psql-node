@@ -1,1 +1,1 @@
-worker: ./initdb.sh && node index.js | npx pino-pretty
+worker: node index.js | npx pino-pretty

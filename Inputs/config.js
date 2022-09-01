@@ -2,6 +2,7 @@ const dbInput = {
   markPriceTable: "public.markPrice",
   orderstable: "public.orderstable",
   settlementPriceTable: "public.settlementprice",
+  stableCoinTable: "public.stablecoinpnl",
   markPriceTimeframe: "1m",
   settlementPriceTimeframe: "1d",
   loadInterval: 60000
@@ -25,6 +26,7 @@ const symbols = [
   "BTC/USDT",
   "XRP/USDT",
   "ADA/USDT",
+  "TRX/USDT",
   "BAT/USDT",
   "LINK/USDT",
   "MANA/USDT",
@@ -48,7 +50,8 @@ const symbols = [
   "ADA/USDC",
   "BAT/USDC",
   "LINK/USDC",
-  "SOL/USDC"
+  "SOL/USDC",
+  "TRX/USDC"
 ]
 
 const symbolsForMarkPrice = [
@@ -57,6 +60,7 @@ const symbolsForMarkPrice = [
   "BTC/USDT",
   "XRP/USDT",
   "ADA/USDT",
+  "TRX/USDT",
   "BAT/USDT",
   "LINK/USDT",
   "MANA/USDT",
@@ -81,6 +85,7 @@ const symbolsForSettlementPrice = [
   "BTC/USDT",
   "XRP/USDT",
   "ADA/USDT",
+  "TRX/USDT",
   "BAT/USDT",
   "LINK/USDT",
   "MANA/USDT",

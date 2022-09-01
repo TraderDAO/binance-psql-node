@@ -1,14 +1,9 @@
-import 'dotenv/config'
-import ccxt from 'ccxt'
+import "dotenv/config"
+import ccxt from "ccxt"
 
 const binanceClient = new ccxt.binance({
-    apiKey: process.env.API_KEY,
-    secret: process.env.API_SECRET
-});
+  apiKey: process.env.API_KEY,
+  secret: process.env.API_SECRET
+})
 
-// binanceClient.setSandboxMode(true);
-
-
-export {
-    binanceClient 
-}
+export { binanceClient }

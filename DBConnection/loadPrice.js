@@ -26,7 +26,7 @@ const loadTrade = async (pool, tableName) => {
     const { price, timestamp, datetime, symbol } =
       lastTrade[lastTrade.length - 1]
     const queryString = `INSERT INTO ${tableName}(symbol, price, datetime, timestamp, receivetime, receiveTimestamp
-      )VALUES('${symbol}', '${price}', '${datetime}', '${timestamp}', '${receiveTime()}', '${receiveTimestamp()}');`
+      )VALUES('${symbol}', '${price}', '${timestampToDate(datetime)}', '${timestamp}', '${receiveTime()}', '${receiveTimestamp()}');`
     logger.debug("queryString:" + queryString)
     pool.query(queryString, (err) => {
       if(err !== undefined) logger.error(`[loadPrice] ${err}`)
@@ -54,9 +54,9 @@ const loadPrice = async (pool, timeframe, tableName) => {
       const price = ohlc[ohlc.length - 2][4]
       const time = ohlc[ohlc.length - 2][0]
       const market = symbols[index]
-      const datetime = timestampToDate(time)
+      const dt = timestampToDate(time)
       const queryString = `INSERT INTO ${tableName}(symbol, price, timestamp, datetime, receivetime, receivetimestamp
-        )VALUES('${market}', '${price}', '${time}', '${datetime}', '${receiveTime()}', '${receiveTimestamp()}');`
+        )VALUES('${market}', '${price}', '${time}', '${dt}', '${receiveTime()}', '${receiveTimestamp()}');`
       pool.query(queryString, (err) => {
         if(err !== undefined) logger.error(`[loadPrice/pool.query] ${err}`)
       })
