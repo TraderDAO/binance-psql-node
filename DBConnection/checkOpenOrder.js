@@ -22,11 +22,11 @@ const checkOpenOrder = async (client, pool) => {
   // console.log('orderRes', orderRes)
 
   orderRes.forEach((order) =>{
-    const { info, remaining, cost } = order;
-    const { executedQty, status: unfilledStatus, orderId } = info;
+    const { info, remaining, cost, status: openStatus } = order;
+    const { executedQty, status: unfilledStatus, orderId, updateTime } = info;
     const queryString = `
     UPDATE ${dbInput.orderstable}
-    SET cost = '${cost}', executedqty = '${executedQty}', remaining = '${remaining}', unfilledstatus = '${unfilledStatus}'
+    SET time = '${updateTime}', cost = '${cost}', executedqty = '${executedQty}', remaining = '${remaining}', unfilledstatus = '${unfilledStatus}', openstatus = '${openStatus}'
     WHERE orderid = '${orderId}'
     `
     // console.log('queryString', queryString);
