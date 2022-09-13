@@ -2,8 +2,7 @@ import { binanceClient } from "../ExchangeSetting/exchangeConfig.js";
 import { dbInput } from "../Inputs/config.js";
 
 const checkOpenOrder = async (client, pool) => {
-  const query = `select * from ${dbInput.orderstable} where unfilledstatus = 'NEW'`
-  
+  const query = `select * from ${dbInput.orderstable} where unfilledstatus = 'NEW' or unfilledstatus = 'PARTIALLY_FILLED'`
   const res = await client.query(query)
   const openOrders = res.rows
   // await client.end()
