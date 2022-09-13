@@ -51,8 +51,8 @@ const loadPrice = async (pool, timeframe, tableName) => {
     })
     const priceResults = await Promise.all(arrOfSymbolPromise)
     priceResults.forEach((ohlc, index) => {
-      const price = ohlc[ohlc.length - 2][4]
-      const time = ohlc[ohlc.length - 2][0]
+      const price = ohlc[ohlc.length - 1][4]
+      const time = ohlc[ohlc.length - 1][0]
       const market = symbols[index]
       const dt = timestampToDate(time)
       const queryString = `INSERT INTO ${tableName}(symbol, price, timestamp, datetime, receivetime, receivetimestamp
