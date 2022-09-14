@@ -21,6 +21,8 @@ const accountSetting = {
 }
 
 const symbols = [
+  'USDC/USDT',
+  'ALGO/USDT',
   "ETH/USDT",
   "BNB/USDT",
   "BTC/USDT",
@@ -55,6 +57,8 @@ const symbols = [
 ]
 
 const symbolsForMarkPrice = [
+  'USDC/USDT',
+  'ALGO/USDT',
   "ETH/USDT",
   "BNB/USDT",
   "BTC/USDT",
@@ -80,6 +84,8 @@ const symbolsForMarkPrice = [
 ]
 
 const symbolsForSettlementPrice = [
+  'USDC/USDT',
+  'ALGO/USDT',
   "ETH/USDT",
   "BNB/USDT",
   "BTC/USDT",
