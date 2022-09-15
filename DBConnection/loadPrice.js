@@ -51,7 +51,7 @@ const loadPrice = async (pool, timeframe, tableName) => {
     })
     const priceResults = await Promise.all(arrOfSymbolPromise)
     priceResults.forEach((ohlc, index) => {
-      const price = ohlc[ohlc.length - 1][4]
+      const price = ohlc[ohlc.length - 1][1]
       const time = ohlc[ohlc.length - 1][0]
       const market = symbols[index]
       const dt = timestampToDate(time)
