@@ -19,7 +19,7 @@ const run = async () => {
   logger.info('Start ...')
   setInterval( async() => {
     loadMarkPrice(pool);
-    loadSettlementPrice(pool);
+    loadSettlementPrice(pool, client);
     await loadPositions(pool);
     await loadOrders(pool);
     await checkOpenOrder(client, pool);

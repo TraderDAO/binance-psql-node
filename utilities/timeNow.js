@@ -23,4 +23,12 @@ const timestampToDate = (timestamp) => {
     time.getUTCSeconds().toString().padStart(2, '0')
 }
 
-export { receiveTimestamp, receiveTime, timestampToDate }
+const utcNow = () => {
+  let now = new Date;
+  let utc_timestamp = Date.UTC(now.getUTCFullYear(),now.getUTCMonth(), now.getUTCDate());
+  return utc_timestamp
+}
+
+
+
+export { receiveTimestamp, receiveTime, timestampToDate, utcNow }
