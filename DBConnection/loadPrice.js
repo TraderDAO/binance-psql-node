@@ -1,15 +1,7 @@
-import {
-  symbols,
-  symbolsForMarkPrice,
-  symbolsForSettlementPrice
-} from "../Inputs/config.js"
+import { symbols, symbolsForMarkPrice, symbolsForSettlementPrice } from "../Inputs/config.js"
 import { dbInput, newBarInput } from "../Inputs/config.js"
 import { binanceClient } from "../ExchangeSetting/exchangeConfig.js"
-import {
-  receiveTimestamp,
-  receiveTime,
-  timestampToDate
-} from "../utilities/timeNow.js"
+import { receiveTimestamp, receiveTime, timestampToDate, utcNow } from "../utilities/timeNow.js"
 import { isNewBar, barInit } from "../utilities/isNewBar.js"
 import logger from "../logger.js"
 
@@ -34,13 +26,17 @@ const loadTrade = async (pool, tableName) => {
   })
 }
 
-const loadSettlementPrice = async (pool) => {
-  if (await isNewBar(newBarInput.market, newBarInput.timeframe)) {
-    loadPrice(
-      pool,
-      dbInput.settlementPriceTimeframe,
-      dbInput.settlementPriceTable
-    )
+const loadSettlementPrice = async (pool, client) => {
+  const query = `select max(timestamp) from ${dbInput.settlementPriceTable}`
+  const res = await client.query(query)
+  const lastSettlementTime = res.rows[0].max   //Data Type after query: lastSettlementTime [ { max: '1661299200000' } ]
+  // await client.end()
+  // console.log('lastSettlementTime', lastSettlementTime)
+  // console.log('timeNow', utcNow())
+  let utcToday = utcNow()
+  // console.log(utcToday != lastSettlementTime)
+  if (utcToday != lastSettlementTime && await isNewBar(newBarInput.market, newBarInput.timeframe)) {
+    loadPrice(pool, dbInput.settlementPriceTimeframe, dbInput.settlementPriceTable)
   }
 }
 
