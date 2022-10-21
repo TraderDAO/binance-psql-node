@@ -1,0 +1,31 @@
+{
+  "name": "crypto-database",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "npm": ">=6.14.12",
+    "node": ">=14.17.0"
+  },
+  "scripts": {
+    "serve": "nodemon index.js | npx pino-pretty",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "traderPete",
+  "type": "module",
+  "license": "MIT",
+  "dependencies": {
+    "@binance/connector": "^1.13.0",
+    "ccxt": "^1.91.15",
+    "date-and-time": "^2.4.1",
+    "dotenv": "^16.0.1",
+    "node-binance-api": "^0.13.1",
+    "pg": "^8.7.3",
+    "pino": "^8.4.2",
+    "pino-pretty": "^9.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.20.0",
+    "eslint-config-google": "^0.14.0"
+  }
+}
