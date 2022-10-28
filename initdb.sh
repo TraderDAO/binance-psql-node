@@ -10,3 +10,8 @@ psql -p 5432 -U postgres -d postgres -w -c "CREATE TABLE public.settlementprice(
 psql -p 5432 -U postgres -d postgres -w -c "CREATE TABLE public.orderstable(id SERIAL PRIMARY KEY, time BIGINT, datetime TEXT, orderId TEXT UNIQUE, symbol TEXT, base TEXT, side TEXT, price numeric, amount numeric, cost numeric, executedQty numeric, remaining numeric, type TEXT, openStatus TEXT, unfilledStatus TEXT, portfolio_id numeric, account_id numeric, exchange_id numeric);"
 psql -p 5432 -U postgres -d postgres -w -c "CREATE TABLE public.stablecoinpnl(symbol TEXT, total_qty numeric, position_value numeric, avg_bought_price numeric, bought_qty numeric, avg_sold_price numeric, sold_qty numeric, unrealized_pnl numeric, realized_pnl numeric, mark_price numeric, mark_time TEXT, timestamp BIGINT, incoming_pnl numeric, trading_pnl numeric, daily_avg_bought_price numeric, daily_bought_qty numeric, daily_avg_sold_price numeric, daily_sold_qty numeric, settlement_time TEXT);"
 
+psql -d traderDao -c "CREATE TABLE dbt_traderdao.assetBalance(id SERIAL PRIMARY KEY, symbol TEXT, amount FLOAT, receivetime TEXT, receiveTimestamp TEXT);"
+psql -d traderDao -c "CREATE TABLE dbt_traderdao.activeasset(id SERIAL PRIMARY KEY, symbol TEXT, receivetime TEXT, receiveTimestamp TEXT);"
+
+
+

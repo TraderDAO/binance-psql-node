@@ -1,8 +1,6 @@
 import { binanceClient } from "../ExchangeSetting/exchangeConfig.js"
 import { dbInput } from "../Inputs/config.js"
-  import {
-    receiveTimestamp,
-  } from "../utilities/timeNow.js"
+import { receiveTimestamp } from "../utilities/timeNow.js"
 import logger from "../logger.js"
 
 const loadPositions = async (pool) => {

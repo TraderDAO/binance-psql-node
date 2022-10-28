@@ -6,10 +6,12 @@ import { isNewBar, barInit } from "../utilities/isNewBar.js"
 import logger from "../logger.js"
 
 const loadMarkPrice = (pool) => {
+  console.log("inside loadMarkPrice")
   loadTrade(pool, dbInput.markPriceTable)
 }
 
 const loadTrade = async (pool, tableName) => {
+  console.log("symbolsForMarkPrice", symbolsForMarkPrice)
   let arrOfSymbolPromise = symbolsForMarkPrice.map((symbol) => {
     return binanceClient.fetchTrades(symbol)
   })
@@ -25,12 +27,16 @@ const loadTrade = async (pool, tableName) => {
     })
   })
 }
-
+ 
 const loadSettlementPrice = async (pool, client) => {
+  console.log("inside loadSettlementPrice")
   const query = `select max(timestamp) from ${dbInput.settlementPriceTable}`
   const res = await client.query(query)
   const lastSettlementTime = res.rows[0].max   //Data Type after query: lastSettlementTime [ { max: '1661299200000' } ]
-  // await client.end()
+  if(lastSettlementTime ==null){
+    return loadPrice(pool, dbInput.settlementPriceTimeframe, dbInput.settlementPriceTable)
+  }
+  // await client.end() 
   // console.log('lastSettlementTime', lastSettlementTime)
   // console.log('timeNow', utcNow())
   let utcToday = utcNow()
@@ -42,6 +48,7 @@ const loadSettlementPrice = async (pool, client) => {
 
 const loadPrice = async (pool, timeframe, tableName) => {
   try {
+    console.log("symbolsForSettlementPrice", symbolsForSettlementPrice)
     let arrOfSymbolPromise = symbolsForSettlementPrice.map((symbol) => {
       return binanceClient.fetchOHLCV(symbol, timeframe)
     })
@@ -49,7 +56,7 @@ const loadPrice = async (pool, timeframe, tableName) => {
     priceResults.forEach((ohlc, index) => {
       const price = ohlc[ohlc.length - 1][1]
       const time = ohlc[ohlc.length - 1][0]
-      const market = symbols[index]
+      const market = symbolsForSettlementPrice[index]
       const dt = timestampToDate(time)
       const queryString = `INSERT INTO ${tableName}(symbol, price, timestamp, datetime, receivetime, receivetimestamp
         )VALUES('${market}', '${price}', '${time}', '${dt}', '${receiveTime()}', '${receiveTimestamp()}');`
