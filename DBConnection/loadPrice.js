@@ -6,6 +6,7 @@ import { isNewBar, barInit } from "../utilities/isNewBar.js"
 import logger from "../logger.js"
 
 const loadMarkPrice = (pool) => {
+  console.log("inside loadMarkPrice")
   loadTrade(pool, dbInput.markPriceTable)
 }
 
@@ -26,13 +27,14 @@ const loadTrade = async (pool, tableName) => {
     })
   })
 }
-
+ 
 const loadSettlementPrice = async (pool, client) => {
+  console.log("inside loadSettlementPrice")
   const query = `select max(timestamp) from ${dbInput.settlementPriceTable}`
   const res = await client.query(query)
   const lastSettlementTime = res.rows[0].max   //Data Type after query: lastSettlementTime [ { max: '1661299200000' } ]
   if(lastSettlementTime ==null){
-    loadPrice(pool, dbInput.settlementPriceTimeframe, dbInput.settlementPriceTable)
+    return loadPrice(pool, dbInput.settlementPriceTimeframe, dbInput.settlementPriceTable)
   }
   // await client.end() 
   // console.log('lastSettlementTime', lastSettlementTime)
@@ -46,6 +48,7 @@ const loadSettlementPrice = async (pool, client) => {
 
 const loadPrice = async (pool, timeframe, tableName) => {
   try {
+    console.log("symbolsForSettlementPrice", symbolsForSettlementPrice)
     let arrOfSymbolPromise = symbolsForSettlementPrice.map((symbol) => {
       return binanceClient.fetchOHLCV(symbol, timeframe)
     })

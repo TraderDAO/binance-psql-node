@@ -21,11 +21,11 @@ const accountSetting = {
 }
 
 let symbols = [
+  "BTC/USDT"
   // 'USDC/USDT',
   // 'ALGO/USDT',
   // "ETH/USDT",
   // "BNB/USDT",
-  "BTC/BUSD"
   // "XRP/USDT",
   // "ADA/USDT",
   // "TRX/USDT",
@@ -57,9 +57,9 @@ let symbols = [
 ]
 
 let symbolsForMarkPrice = [
-  "ETH/USDT",
-  // "BNB/USDT",
   "BTC/USDT"
+  // "ETH/USDT",
+  // "BNB/USDT",
   // 'USDC/USDT',
   // 'ALGO/USDT',
   // "ETH/USDT",
@@ -87,9 +87,9 @@ let symbolsForMarkPrice = [
 ]
 
 let symbolsForSettlementPrice = [
-  "ETH/USDT",
-  // "BNB/USDT",
   "BTC/USDT"
+  // "ETH/USDT",
+  // "BNB/USDT",
   // 'USDC/USDT',
   // 'ALGO/USDT',
   // "ETH/USDT",
@@ -121,24 +121,14 @@ const symbolLastUpdate = {}
 const fetchActiveSymbol = async(client)=>{
   const query = `select distinct symbol from dbt_traderdao.activeasset`;
   const res = await client.query(query);
-  const newAsset = res.rows;
-  // await client.end()
-  // console.log('newAsset', newAsset)
-  const tradingQuotation = newAsset.map((symbol)=>{
-    return symbol.symbol
-  }).filter((symbol)=>{
-    let regex = /LD/i
-    let regex2 = /ETHW/i
-    return !(symbol.match(regex)) && !(symbol.match(regex2))
-  })
-  const quotation = tradingQuotation.filter((symbol)=>{
-    let regex = /USDT/i
-    return symbol.match(regex)
-  })
-  // console.log(quotation)
-  symbolsForMarkPrice = quotation;
-  symbolsForSettlementPrice = quotation;
-  symbols = tradingQuotation;
+  const activeSymbols = res.rows;
+  console.log('activeSymbols', activeSymbols);
+  symbols = activeSymbols.map(symbol => {return symbol.symbol});
+  console.log("new symbols", symbols);
+  symbolsForMarkPrice = symbols.filter(symbol => {return symbol.match(/USDT/i)})
+  console.log('symbolsForMarkPrice', symbolsForMarkPrice)
+  symbolsForSettlementPrice = symbolsForMarkPrice;
+  console.log('symbolsForSettlementPrice', symbolsForSettlementPrice)
 }
 
 export {
