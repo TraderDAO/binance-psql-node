@@ -3,7 +3,7 @@
 PGOPTIONS="--search_path=dbt_traderdao"     
 export PGOPTIONS
 
-psql -d traderDao -c "DROP TABLE IF EXISTS activeasset, assetbalance, markprice, orderstable, settlementprice, stablecoinpnl ;"
+psql -d traderDao -c "DROP TABLE IF EXISTS activeasset, assetbalance, markprice, orderstable, settlementprice, stablecoinpnl;"
 psql -d traderDao -c "CREATE SCHEMA IF NOT EXISTS dbt_traderdao;"
 
 psql -d traderDao -c "CREATE TABLE dbt_traderdao.markprice(id SERIAL PRIMARY KEY, symbol TEXT, price numeric, timestamp BIGINT, datetime TEXT, receivetime TEXT, receiveTimestamp TEXT);"
