@@ -119,7 +119,7 @@ let symbolsForSettlementPrice = [
 const symbolLastUpdate = {};
 
 const fetchActiveSymbol = async (client) => {
-  const query = `select distinct symbol from dbt_traderdao.activeasset`;
+  const query = `select distinct symbol from public.activeasset`;
   const res = await client.query(query);
   const activeSymbols = res.rows;
   console.log("activeSymbols", activeSymbols);
