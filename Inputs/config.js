@@ -1,27 +1,27 @@
 const dbInput = {
-  markPriceTable: "dbt_traderdao.markPrice",
-  orderstable: "dbt_traderdao.orderstable3",
-  settlementPriceTable: "dbt_traderdao.settlementprice",
-  stableCoinTable: "dbt_traderdao.stablecoinpnl",
+  markPriceTable: "public.markPrice",
+  orderstable: "public.orderstable",
+  settlementPriceTable: "public.settlementprice",
+  stableCoinTable: "public.stablecoinpnl",
   markPriceTimeframe: "1m",
   settlementPriceTimeframe: "1d",
-  loadInterval: 60000
-}
+  loadInterval: 60000,
+};
 
 const newBarInput = {
   market: "BTCBUSD",
   timeframe: "1d",
-  exchange: "binance"
-}
+  exchange: "binance",
+};
 
 const accountSetting = {
   exchangeId: 0,
   accountId: 0,
-  portfolioId: 0
-}
+  portfolioId: 0,
+};
 
 let symbols = [
-  "BTC/USDT"
+  "BTC/USDT",
   // 'USDC/USDT',
   // 'ALGO/USDT',
   // "ETH/USDT",
@@ -54,10 +54,10 @@ let symbols = [
   // "LINK/USDC",
   // "SOL/USDC",
   // "TRX/USDC"
-]
+];
 
 let symbolsForMarkPrice = [
-  "BTC/USDT"
+  "BTC/USDT",
   // "ETH/USDT",
   // "BNB/USDT",
   // 'USDC/USDT',
@@ -84,10 +84,10 @@ let symbolsForMarkPrice = [
   // "QNT/USDT",
   // "AXS/USDT",
   // "FIL/USDT"
-]
+];
 
 let symbolsForSettlementPrice = [
-  "BTC/USDT"
+  "BTC/USDT",
   // "ETH/USDT",
   // "BNB/USDT",
   // 'USDC/USDT',
@@ -114,22 +114,26 @@ let symbolsForSettlementPrice = [
   // "QNT/USDT",
   // "AXS/USDT",
   // "FIL/USDT"
-]
+];
 
-const symbolLastUpdate = {}
+const symbolLastUpdate = {};
 
-const fetchActiveSymbol = async(client)=>{
+const fetchActiveSymbol = async (client) => {
   const query = `select distinct symbol from dbt_traderdao.activeasset`;
   const res = await client.query(query);
   const activeSymbols = res.rows;
-  console.log('activeSymbols', activeSymbols);
-  symbols = activeSymbols.map(symbol => {return symbol.symbol});
+  console.log("activeSymbols", activeSymbols);
+  symbols = activeSymbols.map((symbol) => {
+    return symbol.symbol;
+  });
   console.log("new symbols", symbols);
-  symbolsForMarkPrice = symbols.filter(symbol => {return symbol.match(/USDT/i)})
-  console.log('symbolsForMarkPrice', symbolsForMarkPrice)
+  symbolsForMarkPrice = symbols.filter((symbol) => {
+    return symbol.match(/USDT/i);
+  });
+  console.log("symbolsForMarkPrice", symbolsForMarkPrice);
   symbolsForSettlementPrice = symbolsForMarkPrice;
-  console.log('symbolsForSettlementPrice', symbolsForSettlementPrice)
-}
+  console.log("symbolsForSettlementPrice", symbolsForSettlementPrice);
+};
 
 export {
   dbInput,
@@ -139,5 +143,5 @@ export {
   symbolsForMarkPrice,
   symbolsForSettlementPrice,
   accountSetting,
-  fetchActiveSymbol
-}
+  fetchActiveSymbol,
+};
