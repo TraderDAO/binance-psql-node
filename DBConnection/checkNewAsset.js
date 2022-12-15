@@ -12,7 +12,7 @@ const initAssetBalance = async (pool) => {
 const checkNewAsset = async (client, pool) => {
   const query = `select distinct symbol from public.assetbalance`;
   const res = await client.query(query);
-  console.log("res", res.rows);
+  // console.log("res", res.rows);
   const newAssetArr = res.rows.filter((asset) => {
     return !(
       asset.symbol.match(/LD/i) ||
@@ -21,7 +21,7 @@ const checkNewAsset = async (client, pool) => {
       asset.symbol.match(/USDT/i)
     );
   });
-  console.log("newAssetArr", newAssetArr);
+  // console.log("newAssetArr", newAssetArr);
   const newSymbolsBUSD = newAssetArr.map((asset) => {
     let quote = asset.symbol;
     let baseCurrency = "BUSD";
@@ -36,7 +36,7 @@ const checkNewAsset = async (client, pool) => {
   });
 
   const newSymbols = [...newSymbolsBUSD, ...newSymbolsUSDT];
-  console.log("newSymbols", newSymbols);
+  // console.log("newSymbols", newSymbols);
   loadActiveAsset(pool, newSymbols);
 
   const asset = await getBalance();
