@@ -18,96 +18,40 @@ const accountSetting = {
   exchangeId: 0,
   accountId: 0,
   portfolioId: 0,
+  keyId: 0,
 };
 
 let symbols = [
-  "USDC/USDT",
-  "ALGO/USDT",
-  "ETH/USDT",
-  "BNB/USDT",
-  "BTC/USDT",
-  "XRP/USDT",
-  "ADA/USDT",
-  "TRX/USDT",
-  "BAT/USDT",
-  "LINK/USDT",
-  "MANA/USDT",
-  "SOL/USDT",
-  "MATIC/USDT",
-  "THETA/USDT",
-  "HNT/USDT",
-  "DOT/USDT",
-  "YFI/USDT",
-  "LUNA/USDT",
-  "UNI/USDT",
-  "AVAX/USDT",
-  "AAVE/USDT",
-  "QNT/USDT",
-  "AXS/USDT",
-  "FIL/USDT",
-  "ETH/USDC",
-  "BNB/USDC",
-  "BTC/USDC",
-  "XRP/USDC",
-  "ADA/USDC",
-  "BAT/USDC",
-  "LINK/USDC",
-  "SOL/USDC",
-  "TRX/USDC",
+  "RPL/BUSD",
+  "BTC/BUSD",
+  "ETH/BUSD",
+  "MATIC/BUSD",
+  "OP/BUSD",
+  "LDO/BUSD",
+  "ENS/BUSD",
+  "BAT/BUSD",
 ];
 
 let symbolsForMarkPrice = [
-  "USDC/USDT",
-  "ALGO/USDT",
-  "ETH/USDT",
-  "BNB/USDT",
-  "BTC/USDT",
-  "XRP/USDT",
-  "ADA/USDT",
-  "TRX/USDT",
-  "BAT/USDT",
-  "LINK/USDT",
-  "MANA/USDT",
-  "SOL/USDT",
-  "MATIC/USDT",
-  "THETA/USDT",
-  "HNT/USDT",
-  "DOT/USDT",
-  "YFI/USDT",
-  "LUNA/USDT",
-  "UNI/USDT",
-  "AVAX/USDT",
-  "AAVE/USDT",
-  "QNT/USDT",
-  "AXS/USDT",
-  "FIL/USDT",
+  "RPL/BUSD",
+  "BTC/BUSD",
+  "ETH/BUSD",
+  "MATIC/BUSD",
+  "OP/BUSD",
+  "LDO/BUSD",
+  "ENS/BUSD",
+  "BAT/BUSD",
 ];
 
 let symbolsForSettlementPrice = [
-  "USDC/USDT",
-  "ALGO/USDT",
-  "ETH/USDT",
-  "BNB/USDT",
-  "BTC/USDT",
-  "XRP/USDT",
-  "ADA/USDT",
-  "TRX/USDT",
-  "BAT/USDT",
-  "LINK/USDT",
-  "MANA/USDT",
-  "SOL/USDT",
-  "MATIC/USDT",
-  "THETA/USDT",
-  "HNT/USDT",
-  "DOT/USDT",
-  "YFI/USDT",
-  "LUNA/USDT",
-  "UNI/USDT",
-  "AVAX/USDT",
-  "AAVE/USDT",
-  "QNT/USDT",
-  "AXS/USDT",
-  "FIL/USDT",
+  "RPL/BUSD",
+  "BTC/BUSD",
+  "ETH/BUSD",
+  "MATIC/BUSD",
+  "OP/BUSD",
+  "LDO/BUSD",
+  "ENS/BUSD",
+  "BAT/BUSD",
 ];
 
 const symbolLastUpdate = {};
@@ -116,17 +60,17 @@ const fetchActiveSymbol = async (client) => {
   const query = `select distinct symbol from public.activeasset`;
   const res = await client.query(query);
   const activeSymbols = res.rows;
-  console.log("activeSymbols", activeSymbols);
+  // console.log("activeSymbols", activeSymbols);
   symbols = activeSymbols.map((symbol) => {
     return symbol.symbol;
   });
-  console.log("new symbols", symbols);
+  // console.log("new symbols", symbols);
   symbolsForMarkPrice = symbols.filter((symbol) => {
-    return symbol.match(/USDT/i);
+    return symbol.match(/BUSD/i);
   });
-  console.log("symbolsForMarkPrice", symbolsForMarkPrice);
+  // console.log("symbolsForMarkPrice", symbolsForMarkPrice);
   symbolsForSettlementPrice = symbolsForMarkPrice;
-  console.log("symbolsForSettlementPrice", symbolsForSettlementPrice);
+  // console.log("symbolsForSettlementPrice", symbolsForSettlementPrice);
 };
 
 export {
@@ -139,3 +83,93 @@ export {
   accountSetting,
   fetchActiveSymbol,
 };
+
+// let symbols = [
+//   "USDC/USDT",
+//   "ALGO/USDT",
+//   "ETH/USDT",
+//   "BNB/USDT",
+//   "BTC/USDT",
+//   "XRP/USDT",
+//   "ADA/USDT",
+//   "TRX/USDT",
+//   "BAT/USDT",
+//   "LINK/USDT",
+//   "MANA/USDT",
+//   "SOL/USDT",
+//   "MATIC/USDT",
+//   "THETA/USDT",
+//   "HNT/USDT",
+//   "DOT/USDT",
+//   "YFI/USDT",
+//   "LUNA/USDT",
+//   "UNI/USDT",
+//   "AVAX/USDT",
+//   "AAVE/USDT",
+//   "QNT/USDT",
+//   "AXS/USDT",
+//   "FIL/USDT",
+//   "ETH/USDC",
+//   "BNB/USDC",
+//   "BTC/USDC",
+//   "XRP/USDC",
+//   "ADA/USDC",
+//   "BAT/USDC",
+//   "LINK/USDC",
+//   "SOL/USDC",
+//   "TRX/USDC",
+// ];
+
+// let symbolsForMarkPrice = [
+//   "USDC/USDT",
+//   "ALGO/USDT",
+//   "ETH/USDT",
+//   "BNB/USDT",
+//   "BTC/USDT",
+//   "XRP/USDT",
+//   "ADA/USDT",
+//   "TRX/USDT",
+//   "BAT/USDT",
+//   "LINK/USDT",
+//   "MANA/USDT",
+//   "SOL/USDT",
+//   "MATIC/USDT",
+//   "THETA/USDT",
+//   "HNT/USDT",
+//   "DOT/USDT",
+//   "YFI/USDT",
+//   "LUNA/USDT",
+//   "UNI/USDT",
+//   "AVAX/USDT",
+//   "AAVE/USDT",
+//   "QNT/USDT",
+//   "AXS/USDT",
+//   "FIL/USDT",
+// ];
+
+// let symbolsForSettlementPrice = [
+//   "USDC/USDT",
+//   "ALGO/USDT",
+//   "ETH/USDT",
+//   "BNB/USDT",
+//   "BTC/USDT",
+//   "XRP/USDT",
+//   "ADA/USDT",
+//   "TRX/USDT",
+//   "BAT/USDT",
+//   "LINK/USDT",
+//   "MANA/USDT",
+//   "SOL/USDT",
+//   "MATIC/USDT",
+//   "THETA/USDT",
+//   "HNT/USDT",
+//   "DOT/USDT",
+//   "YFI/USDT",
+//   "LUNA/USDT",
+//   "UNI/USDT",
+//   "AVAX/USDT",
+//   "AAVE/USDT",
+//   "QNT/USDT",
+//   "AXS/USDT",
+//   "FIL/USDT",
+// ];

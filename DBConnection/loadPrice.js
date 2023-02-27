@@ -20,7 +20,7 @@ const loadMarkPrice = (pool) => {
 };
 
 const loadTrade = async (pool, tableName) => {
-  console.log("symbolsForMarkPrice", symbolsForMarkPrice);
+  // console.log("symbolsForMarkPrice", symbolsForMarkPrice);
   let arrOfSymbolPromise = symbolsForMarkPrice.map((symbol) => {
     return binanceClient.fetchTrades(symbol);
   });
@@ -40,7 +40,7 @@ const loadTrade = async (pool, tableName) => {
 };
 
 const loadSettlementPrice = async (pool, client) => {
-  console.log("inside loadSettlementPrice");
+  // console.log("inside loadSettlementPrice");
   const query = `select max(timestamp) from ${dbInput.settlementPriceTable}`;
   const res = await client.query(query);
   const lastSettlementTime = res.rows[0].max; //Data Type after query: lastSettlementTime [ { max: '1661299200000' } ]
