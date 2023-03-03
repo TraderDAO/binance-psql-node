@@ -30,6 +30,7 @@ let symbols = [
   "LDO/BUSD",
   "ENS/BUSD",
   "BAT/BUSD",
+  "BNB/BUSD",
 ];
 
 let symbolsForMarkPrice = [
@@ -41,6 +42,7 @@ let symbolsForMarkPrice = [
   "LDO/BUSD",
   "ENS/BUSD",
   "BAT/BUSD",
+  "BNB/BUSD",
 ];
 
 let symbolsForSettlementPrice = [
@@ -52,6 +54,7 @@ let symbolsForSettlementPrice = [
   "LDO/BUSD",
   "ENS/BUSD",
   "BAT/BUSD",
+  "BNB/BUSD",
 ];
 
 const symbolLastUpdate = {};
