@@ -8,8 +8,8 @@
     "node": ">=14.17.0"
   },
   "scripts": {
-    "serve": "nodemon index.js | npx pino-pretty",
-    "prod": "node index.js | npx pino-pretty",
+    "serve": "nodemon binanceDataLoader.js | npx pino-pretty",
+    "prod": "node binanceDataLoader.js | npx pino-pretty",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "traderPete",
