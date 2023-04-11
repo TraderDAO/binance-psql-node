@@ -22,39 +22,51 @@ const accountSetting = {
 };
 
 let symbols = [
-  "RPL/BUSD",
-  "BTC/BUSD",
-  "ETH/BUSD",
-  "MATIC/BUSD",
-  "OP/BUSD",
-  "LDO/BUSD",
-  "ENS/BUSD",
-  "BAT/BUSD",
-  "BNB/BUSD",
+  "WBTC/BTC",
+  "BTC/USDC",
+  "ETH/USDC",
+  "USDC/USDT",
+  "RPL/USDT",
+  "BTC/USDT",
+  "ETH/USDT",
+  "MATIC/USDT",
+  "OP/USDT",
+  "LDO/USDT",
+  "ENS/USDT",
+  "BAT/USDT",
+  "BNB/USDT",
 ];
 
 let symbolsForMarkPrice = [
-  "RPL/BUSD",
-  "BTC/BUSD",
-  "ETH/BUSD",
-  "MATIC/BUSD",
-  "OP/BUSD",
-  "LDO/BUSD",
-  "ENS/BUSD",
-  "BAT/BUSD",
-  "BNB/BUSD",
+  "WBTC/BTC",
+  "BTC/USDC",
+  "ETH/USDC",
+  "USDC/USDT",
+  "RPL/USDT",
+  "BTC/USDT",
+  "ETH/USDT",
+  "MATIC/USDT",
+  "OP/USDT",
+  "LDO/USDT",
+  "ENS/USDT",
+  "BAT/USDT",
+  "BNB/USDT",
 ];
 
 let symbolsForSettlementPrice = [
-  "RPL/BUSD",
-  "BTC/BUSD",
-  "ETH/BUSD",
-  "MATIC/BUSD",
-  "OP/BUSD",
-  "LDO/BUSD",
-  "ENS/BUSD",
-  "BAT/BUSD",
-  "BNB/BUSD",
+  "WBTC/BTC",
+  "BTC/USDC",
+  "ETH/USDC",
+  "USDC/USDT",
+  "RPL/USDT",
+  "BTC/USDT",
+  "ETH/USDT",
+  "MATIC/USDT",
+  "OP/USDT",
+  "LDO/USDT",
+  "ENS/USDT",
+  "BAT/USDT",
+  "BNB/USDT",
 ];
 
 const symbolLastUpdate = {};
@@ -67,12 +79,13 @@ const fetchActiveSymbol = async (client) => {
   symbols = activeSymbols.map((symbol) => {
     return symbol.symbol;
   });
+  symbolsForMarkPrice = symbols;
   // console.log("new symbols", symbols);
-  symbolsForMarkPrice = symbols.filter((symbol) => {
-    return symbol.match(/BUSD/i);
-  });
+  // symbolsForMarkPrice = symbols.filter((symbol) => {
+  //   return symbol.match(/BUSD/i);
+  // });
   // console.log("symbolsForMarkPrice", symbolsForMarkPrice);
-  symbolsForSettlementPrice = symbolsForMarkPrice;
+  symbolsForSettlementPrice = symbols;
   // console.log("symbolsForSettlementPrice", symbolsForSettlementPrice);
 };
 
