@@ -21,7 +21,7 @@
 PGOPTIONS="--search_path=public"
 export PGOPTIONS
 
-psql -d traderDao -c  "DROP TABLE IF EXISTS activeasset, assetbalance, markprice, orderstable, settlementprice, stablecoinpnl, targetweight, alpha CASCADE;"
+psql -d traderDao -c  "DROP TABLE IF EXISTS activeasset, assetbalance, markprice, orderstable, settlementprice, stablecoinpnl, targetweight, alpha, ledger CASCADE;"
 psql -d traderDao -c  "CREATE SCHEMA IF NOT EXISTS public;"
 
 psql -d traderDao -c  "CREATE TABLE markprice(id SERIAL PRIMARY KEY, symbol TEXT, price numeric, timestamp BIGINT, datetime TEXT, receivetime TEXT, receiveTimestamp TEXT);"
@@ -34,6 +34,7 @@ psql -d traderDao -c  "CREATE TABLE targetweight(id SERIAL PRIMARY KEY, symbol T
 psql -d traderDao -c  "create table alpha(id serial primary key, symbol text, signaltime text, dbreceivetime timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL, alarm numeric, pix numeric, stopOut numeric, inOut numeric, noDays numeric); "
 psql -d traderDao -c  "CREATE TABLE public.orderstable(id SERIAL PRIMARY KEY, clientOrderId text, orderId text, orderListId text, orderReqTime text, serverTime text, dbWrittingTime timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL, exchangeReceiveTime text, exchangeReceiveTimestamp numeric, datetime text, lastTradeTime text, lastTradeTimestamp text, updateTime text, symbol TEXT, base TEXT, side TEXT, price numeric, amount numeric, type TEXT, origQty numeric, executedQty numeric, cummulativeQuoteQty numeric, cost numeric, remaining numeric, filled numeric, reduceOnly BOOLEAN, triggerPrice numeric, openStatus TEXT, unfilledStatus TEXT, fee text, portfolio_id numeric, account_id numeric, exchange_id numeric, key_id numeric);"
 
+psql -d traderDao -c  "CREATE TABLE ledger(id SERIAL PRIMARY KEY, exchangeId text, txId text, timestamp text, datetime text, type text, currency text, amount float, network text, status text, confirmTimes text);"
 
 
 

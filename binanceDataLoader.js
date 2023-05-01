@@ -14,6 +14,7 @@ import {
   initAssetBalance,
   checkNewAsset,
 } from "./DBConnection/checkNewAsset.js";
+import { loadLedger } from "./DBConnection/loadLedger.js";
 
 const main = async () => {
   logger.info("init DB Pool ...");
@@ -31,10 +32,11 @@ const main = async () => {
 
   logger.info("Start ...");
   setInterval(async () => {
-    await checkNewAsset(client, pool);
-    await fetchActiveSymbol(client);
+    // await checkNewAsset(client, pool);
+    // await fetchActiveSymbol(client);
     loadMarkPrice(pool);
     loadSettlementPrice(pool, client);
+    loadLedger(pool, client);
     await loadPositions(pool);
     await checkOpenOrder(client, pool);
     logger.info("-".repeat(30));

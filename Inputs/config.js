@@ -3,6 +3,7 @@ const dbInput = {
   orderstable: "public.orderstable",
   settlementPriceTable: "public.settlementprice",
   stableCoinTable: "public.stablecoinpnl",
+  ledgerTable: "public.ledger",
   markPriceTimeframe: "1m",
   settlementPriceTimeframe: "1d",
   loadInterval: 60000,
@@ -21,52 +22,22 @@ const accountSetting = {
   keyId: 0,
 };
 
-let symbols = [
-  "WBTC/BTC",
-  "BTC/USDC",
-  "ETH/USDC",
-  "USDC/USDT",
-  "RPL/USDT",
-  "BTC/USDT",
-  "ETH/USDT",
-  "MATIC/USDT",
-  "OP/USDT",
-  "LDO/USDT",
-  "ENS/USDT",
-  "BAT/USDT",
-  "BNB/USDT",
-];
+let symbols = ["BTC/USDC", "ETH/USDC", "USDC/USDT", "BNB/USDC", "RPL/USDT"];
 
 let symbolsForMarkPrice = [
-  "WBTC/BTC",
   "BTC/USDC",
   "ETH/USDC",
   "USDC/USDT",
+  "BNB/USDC",
   "RPL/USDT",
-  "BTC/USDT",
-  "ETH/USDT",
-  "MATIC/USDT",
-  "OP/USDT",
-  "LDO/USDT",
-  "ENS/USDT",
-  "BAT/USDT",
-  "BNB/USDT",
 ];
 
 let symbolsForSettlementPrice = [
-  "WBTC/BTC",
   "BTC/USDC",
   "ETH/USDC",
   "USDC/USDT",
+  "BNB/USDC",
   "RPL/USDT",
-  "BTC/USDT",
-  "ETH/USDT",
-  "MATIC/USDT",
-  "OP/USDT",
-  "LDO/USDT",
-  "ENS/USDT",
-  "BAT/USDT",
-  "BNB/USDT",
 ];
 
 const symbolLastUpdate = {};
