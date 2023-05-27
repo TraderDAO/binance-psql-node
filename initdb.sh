@@ -21,7 +21,7 @@
 PGOPTIONS="--search_path=public"
 export PGOPTIONS
 
-psql -d traderDao -c  "DROP TABLE IF EXISTS activeasset, assetbalance, markprice, orderstable, settlementprice, stablecoinpnl, targetweight, alpha, ledger CASCADE;"
+psql -d traderDao -c  "DROP TABLE IF EXISTS activeasset, assetbalance, markprice, orderstable, settlementprice, stablecoinpnl, targetweight, alpha, ledger, safeBalance CASCADE;"
 psql -d traderDao -c  "CREATE SCHEMA IF NOT EXISTS public;"
 
 psql -d traderDao -c  "CREATE TABLE markprice(id SERIAL PRIMARY KEY, symbol TEXT, price numeric, timestamp BIGINT, datetime TEXT, receivetime TEXT, receiveTimestamp TEXT);"
@@ -37,6 +37,7 @@ psql -d traderDao -c  "CREATE TABLE public.orderstable(id SERIAL PRIMARY KEY, cl
 psql -d traderDao -c  "CREATE TABLE ledger(id SERIAL PRIMARY KEY, exchangeId text, txId text, timestamp text, datetime text, type text, currency text, amount float, network text, status text, confirmTimes text);"
 
 
+psql -d traderDao -c  "CREATE TABLE safeBalance(id SERIAL PRIMARY KEY, symbol TEXT, price numeric, amount numeric, value numeric, receiveTime TEXT);"
 
 
 

@@ -1,6 +1,7 @@
 import "dotenv/config";
 import { dbInput, newBarInput, fetchActiveSymbol } from "./Inputs/config.js";
 import { loadPositions } from "./DBConnection/loadPositions.js";
+import { loadSafeBalance } from "./DBConnection/loadSafeBalance.js";
 import { initDB, initClient } from "./DBConnection/initPool.js";
 import {
   loadSettlementPrice,
@@ -32,6 +33,7 @@ const main = async () => {
 
   logger.info("Start ...");
   setInterval(async () => {
+    loadSafeBalance(pool, client);
     // await checkNewAsset(client, pool);
     // await fetchActiveSymbol(client);
     loadMarkPrice(pool);
