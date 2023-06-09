@@ -4,13 +4,16 @@ import logger from "../logger.js";
 import axios from "axios";
 import { isNewBar } from "../utilities/isNewBar.js";
 import { dbInput, newBarInput } from "../Inputs/config.js";
+import { ethers } from "ethers";
 
 const loadSafeBalance = async (pool, client) => {
   const query = `select max(timestamp) from ${dbInput.settlementPriceTable}`;
   const res = await client.query(query);
   const lastSettlementTime = res.rows[0].max;
   if (lastSettlementTime == null) {
-    return loadFormAlchemy(pool);
+    loadFormAlchemy(pool);
+    loadEthBalance(pool);
+    return true;
   }
   let utcToday = utcNow();
   if (
@@ -18,6 +21,7 @@ const loadSafeBalance = async (pool, client) => {
     (await isNewBar(newBarInput.market, newBarInput.timeframe))
   ) {
     loadFormAlchemy(pool);
+    loadEthBalance(pool);
   }
 };
 
@@ -59,7 +63,10 @@ const loadFormAlchemy = async (pool) => {
 
   // Remove tokens with zero balance
   const nonZeroBalances = await balances.tokenBalances.filter((token) => {
-    return token.tokenBalance !== "0";
+    return (
+      token.tokenBalance !==
+      "0x0000000000000000000000000000000000000000000000000000000000000000"
+    );
   });
 
   // Loop through all tokens with non-zero balance
@@ -92,7 +99,7 @@ const loadFormAlchemy = async (pool) => {
     console.log(metadata["data"]["result"]);
     let symbol = metadata["data"]["result"].symbol;
 
-    if (symbol === "USDC") {
+    if (symbol === "USDC" || symbol === "USDT") {
       const price = 1;
       const amount = balance;
       const value = price * amount;
@@ -109,6 +116,7 @@ const loadFormAlchemy = async (pool) => {
       const queryString = `INSERT INTO public.safebalance(symbol, price, amount, value, receiveTime
                 )VALUES('${symbol}', '${price}', '${amount}', '${value}','${receiveTime()}');`;
       logger.debug("queryString:" + queryString);
+      console.log(queryString);
       pool.query(queryString, (err) => {
         if (err !== undefined) logger.error(`[loadPrice] ${err}`);
       });
@@ -116,4 +124,46 @@ const loadFormAlchemy = async (pool) => {
   }
 };
 
+const loadEthBalance = async (pool) => {
+  // Wallet address
+  const address = "0x7e00Ed1923a5Ca4D8B63a8217501A05E4EaA6304";
+
+  // Alchemy URL --> Replace with your API key at the end
+  const apiKey = `S4YYchGK_zVKKaxGoraBOq5mDRYGQyW6`;
+
+  var data = JSON.stringify({
+    jsonrpc: "2.0",
+    id: 1,
+    method: "eth_getBalance",
+    params: [address, "latest"],
+  });
+
+  var config = {
+    method: "post",
+    url: `https://eth-mainnet.g.alchemy.com/v2/${apiKey}`,
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    data: data,
+  };
+
+  // Query smart contract by alchemy
+  const response = await axios(config);
+  console.log(response["data"]);
+  const balance = response["data"]["result"];
+  const ethAmount = ethers.formatEther(balance);
+
+  // Write to DB
+  const symbol = "ETH";
+  const price = (await binanceClient.fetchTicker("ETH/USDT")).close;
+  const amount = ethAmount;
+  const value = price * amount;
+  const queryString = `INSERT INTO public.safebalance(symbol, price, amount, value, receiveTime
+              )VALUES('${symbol}', '${price}', '${amount}', '${value}','${receiveTime()}');`;
+  logger.debug("queryString:" + queryString);
+  pool.query(queryString, (err) => {
+    if (err !== undefined) logger.error(`[loadPrice] ${err}`);
+  });
+};
 export { loadSafeBalance };

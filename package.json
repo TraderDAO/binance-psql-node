@@ -21,6 +21,7 @@
     "ccxt": "^1.91.15",
     "date-and-time": "^2.4.1",
     "dotenv": "^16.0.1",
+    "ethers": "^6.5.1",
     "node-binance-api": "^0.13.1",
     "pg": "^8.7.3",
     "pino": "^8.4.2",
