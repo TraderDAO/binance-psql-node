@@ -109,8 +109,8 @@ const loadFormAlchemy = async (pool) => {
       pool.query(queryString, (err) => {
         if (err !== undefined) logger.error(`[loadPrice] ${err}`);
       });
-    } else if (symbol === "WETH") {
-      const price = (await binanceClient.fetchTicker("ETH/USDT")).close;
+    } else if (symbol === "RPL") {
+      const price = (await binanceClient.fetchTicker("RPL/USDT")).close;
       const amount = balance;
       const value = price * amount;
       const queryString = `INSERT INTO public.safebalance(symbol, price, amount, value, receiveTime
