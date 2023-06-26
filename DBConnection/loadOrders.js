@@ -10,7 +10,7 @@ const loadOrders = async (pool) => {
       // console.log(symbolLastUpdate);
       // console.log(symbolLastUpdate[`${symbols[i]}`]);
       // const symbolLastUpdateTime = await loadOrdersbySymbol( symbols[i], pool, symbolLastUpdate[`${symbols[i]}`]);
-      await loadOrdersbySymbol(symbols[i], pool, undefined);
+      await loadOrdersbySymbol(symbols[i], pool, 1681171199000);
       // symbolLastUpdate[`${symbols[i]}`] = symbolLastUpdateTime;
       // console.log(symbolLastUpdate)
     }
