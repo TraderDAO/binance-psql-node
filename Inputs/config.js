@@ -22,7 +22,17 @@ const accountSetting = {
   keyId: 0,
 };
 
-let symbols = ["BTC/USDC", "ETH/USDC", "USDC/USDT", "BNB/USDC", "RPL/USDT"];
+let symbols = [
+  "BTC/USDC",
+  "ETH/USDC",
+  "USDC/USDT",
+  "BNB/USDC",
+  "RPL/USDT",
+  "ETH/USDT",
+  "BTC/USDT",
+  "BNB/USDT",
+  "BCH/USDT",
+];
 
 let symbolsForMarkPrice = [
   "BTC/USDC",
@@ -30,6 +40,7 @@ let symbolsForMarkPrice = [
   "USDC/USDT",
   "BNB/USDC",
   "RPL/USDT",
+  "BCH/USDT",
 ];
 
 let symbolsForSettlementPrice = [
@@ -38,6 +49,7 @@ let symbolsForSettlementPrice = [
   "USDC/USDT",
   "BNB/USDC",
   "RPL/USDT",
+  "BCH/USDT",
 ];
 
 const symbolLastUpdate = {};
