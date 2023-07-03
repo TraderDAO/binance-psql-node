@@ -32,6 +32,10 @@ let symbols = [
   "BTC/USDT",
   "BNB/USDT",
   "BCH/USDT",
+  "ETC/USDT",
+  "LTC/USDT",
+  "ZEC/USDT",
+  "LINK/USDT",
 ];
 
 let symbolsForMarkPrice = [
@@ -41,6 +45,10 @@ let symbolsForMarkPrice = [
   "BNB/USDC",
   "RPL/USDT",
   "BCH/USDT",
+  "ETC/USDT",
+  "LTC/USDT",
+  "ZEC/USDT",
+  "LINK/USDT",
 ];
 
 let symbolsForSettlementPrice = [
@@ -50,6 +58,10 @@ let symbolsForSettlementPrice = [
   "BNB/USDC",
   "RPL/USDT",
   "BCH/USDT",
+  "ETC/USDT",
+  "LTC/USDT",
+  "ZEC/USDT",
+  "LINK/USDT",
 ];
 
 const symbolLastUpdate = {};
